@@ -14,7 +14,6 @@
 
 void jogar() {
 	menu();
-	
 }
 
 //funções
@@ -24,28 +23,15 @@ void Embaralhar () {
 	struct Peca temp;
 	for(int i=n-1;i>0;i--) {
 		int j = rand()%(n);
-		temp=peca[i];
-		peca[i]=peca[j];
-		peca[j]=temp;
+		temp=pecas[i];
+		pecas[i]=pecas[j];
+		pecas[j]=temp;
 	}
-}
-
-void IniciarPecas() {
-	int p=0;
-	
-	for(int i=0;i<7;i++) {
-		for(int j=i;j<7;j++) {
-			peca[p].ladoA=i;
-			peca[p].ladoB=j;
-			peca[p].status='B';
-			p++;
-		}
-	}	
 }
 
 void ApresentarPecas() {
 	for (int l=0; l<28; l++) {
-		printf("[%d|%d]	", peca[l].ladoA, peca[l].ladoB);
+		printf("[%d|%d]	", pecas[l].ladoA, pecas[l].ladoB);
 	}
 	printf("\n\n");
 }	

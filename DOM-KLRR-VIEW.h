@@ -6,3 +6,6 @@
 //Rodrigo Ward Leite
 
 void menu();
+void submenu();
+void mesa();
+void apresentar_1jogador();
