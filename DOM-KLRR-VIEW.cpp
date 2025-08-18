@@ -13,6 +13,13 @@
 
 int op1, op2;
 
+void ApresentarPecas() {
+	for (int l=0; l<28; l++) {
+		printf("[%d|%d]	", pecas[l].ladoA, pecas[l].ladoB);
+	}
+	printf("\n\n");
+}	
+
 void menu() {
 	printf("--------------MENU---------------\n");
 	printf("1 - Iniciar jogo (2 jogadores)\n");
@@ -34,13 +41,6 @@ void submenu() {
 	printf("Opcao selecionada: ");
 	scanf("%d", &op2);
 }
-
-void ApresentarPecas() {
-	for (int l=0; l<28; l++) {
-		printf("[%d|%d]	", pecas[l].ladoA, pecas[l].ladoB);
-	}
-	printf("\n\n");
-}	
 
 void mesa() {
 	
