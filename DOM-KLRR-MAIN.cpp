@@ -13,9 +13,5 @@
 
 int main(){
 	GerarPecas();
-	ApresentarPecas();
-	Embaralhar();
-	ApresentarPecas();	
-	
 	jogar();	
 }
