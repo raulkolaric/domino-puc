@@ -13,7 +13,13 @@
 #include "DOM-KLRR-VIEW.cpp"
 
 void jogar() {
-	menu();
+	Embaralhar();
+	ApresentarPecas();
+	Embaralhar();
+	ApresentarPecas();
+	Embaralhar();
+	ApresentarPecas();
+//	menu();
 }
 
 //funções
@@ -29,9 +35,3 @@ void Embaralhar () {
 	}
 }
 
-void ApresentarPecas() {
-	for (int l=0; l<28; l++) {
-		printf("[%d|%d]	", pecas[l].ladoA, pecas[l].ladoB);
-	}
-	printf("\n\n");
-}	

@@ -35,6 +35,13 @@ void submenu() {
 	scanf("%d", &op2);
 }
 
+void ApresentarPecas() {
+	for (int l=0; l<28; l++) {
+		printf("[%d|%d]	", pecas[l].ladoA, pecas[l].ladoB);
+	}
+	printf("\n\n");
+}	
+
 void mesa() {
 	
 }

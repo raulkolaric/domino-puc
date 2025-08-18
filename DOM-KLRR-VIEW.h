@@ -8,4 +8,5 @@
 void menu();
 void submenu();
 void mesa();
-void apresentar_1jogador();
+void apresentar_1jogador(); 
+void ApresentarPecas();
