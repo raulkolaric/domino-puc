@@ -5,8 +5,7 @@
 //Raul Kolaric
 //Rodrigo Ward Leite
 
-void ApresentarPecas();
+void jogar();
 void Embaralhar();
 void IniciarPecas();
 
-void jogar();
