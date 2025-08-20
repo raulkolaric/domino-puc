@@ -11,4 +11,5 @@ void mesa();
 void apresentaMensagem(char mens[100]);
 void apresentar_1jogador(); 
 void ApresentarPecas();
+void fclear();
 void limpaTela();

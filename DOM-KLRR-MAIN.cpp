@@ -8,7 +8,6 @@
 #include <stdio.h>
 
 #include "DOM-KLRR-MODEL.cpp"
-
 #include "DOM-KLRR-CONTROLLER.cpp"
 
 int main(){
