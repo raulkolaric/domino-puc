@@ -8,4 +8,4 @@
 void jogar();
 void Embaralhar();
 void IniciarPecas();
-
+void ApresentaMensagem();

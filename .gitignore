@@ -3,3 +3,6 @@
 
 # Ignore all .exe files
 *.exe
+
+#vscode 
+*.vscode
