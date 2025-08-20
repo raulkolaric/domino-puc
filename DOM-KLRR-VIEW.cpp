@@ -12,6 +12,7 @@
 #include "DOM-KLRR-VIEW.h"
 
 char op1, op2;
+int pecaMesa;
 
 void ApresentarPecas() {
 	for (int l=0; l<28; l++) {
@@ -41,13 +42,13 @@ char menuInicial() {
 	return op; 
 }
 
-void submenu() {
+char menuJogador() {
 	printf("J - Jogar (possíveis n1 ou n2)");
 	printf("C - Comprar");
 	printf("P – Passar");
 	printf("S – Sair (interromper o jogo voltando ao menu inicial)");
 	printf("Opcao selecionada: ");
-	scanf("%d", &op2);
+	scanf("%c", &op2);
 }
 
 void apresentaMensagem(char mens[100]) {
@@ -56,6 +57,9 @@ void apresentaMensagem(char mens[100]) {
 
 void mesa() {
 	
+	for (int l=0; l<pecaMesa; l++) {
+		printf("[%d|%d]	", pecas[l].ladoA, pecas[l].ladoB);
+	}
 }
 
 void apresentar_1jogador() {

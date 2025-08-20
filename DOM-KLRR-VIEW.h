@@ -6,7 +6,7 @@
 //Rodrigo Ward Leite
 
 char menuInicial();
-void submenu();
+char menuJogador();
 void mesa();
 void apresentaMensagem(char mens[100]);
 void apresentar_1jogador(); 
