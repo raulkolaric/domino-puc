@@ -28,7 +28,7 @@ void jogar() {
 }
 
 //fun��es
-void Embaralhar () {
+void Embaralhar() {
 	srand(time(0));
 	int n=28;
 	struct Peca temp;
@@ -42,4 +42,10 @@ void Embaralhar () {
 
 void limpaTela() {
 	system("cls");
+}
+
+void teste() {
+	char op;
+	op = menuInicial();
+	switch(op)	
 }
