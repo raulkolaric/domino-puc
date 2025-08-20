@@ -42,6 +42,10 @@ void submenu() {
 	scanf("%d", &op2);
 }
 
+void apresentaMensagem(char mens[100]) {
+	printf("%s\n", mens);	
+}
+
 void mesa() {
 	
 }
@@ -49,3 +53,8 @@ void mesa() {
 void apresentar_1jogador() {
 	
 }
+
+void limpaTela() {
+	system("cls");
+}
+
