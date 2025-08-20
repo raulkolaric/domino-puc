@@ -1,6 +1,6 @@
-//DOM-KLRR-CONTROLLER - Projeto Dominó
+//DOM-KLRR-CONTROLLER - Projeto Dominï¿½
 //##-08-25 - Grupo: KLRR
-//Kauã Bezerra Brito
+//Kauï¿½ Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
 //Rodrigo Ward Leite
@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <iostream>
+#include <windows.h>
 
 #include "DOM-KLRR-CONTROLLER.h"
 #include "DOM-KLRR-VIEW.cpp"
@@ -15,15 +17,18 @@
 void jogar() {
 	Embaralhar();
 	ApresentarPecas();
+	Sleep(1000);
 	Embaralhar();
 	ApresentarPecas();
+	Sleep(1000);
 	Embaralhar();
 	ApresentarPecas();
+	Sleep(1000);
 //	menu();
 }
 
-//funções
-void Embaralhar () {
+//funï¿½ï¿½es
+void Embaralhar() {
 	srand(time(0));
 	int n=28;
 	struct Peca temp;
@@ -35,3 +40,12 @@ void Embaralhar () {
 	}
 }
 
+void limpaTela() {
+	system("cls");
+}
+
+void teste() {
+	char op;
+	op = menuInicial();
+	switch(op)	
+}
