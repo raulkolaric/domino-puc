@@ -5,7 +5,7 @@
 //Raul Kolaric
 //Rodrigo Ward Leite
 
-void menu();
+char menuInicial();
 void submenu();
 void mesa();
 void apresentaMensagem(char mens[100]);

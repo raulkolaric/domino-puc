@@ -11,7 +11,7 @@
 
 #include "DOM-KLRR-VIEW.h"
 
-int op1, op2;
+char op1, op2;
 
 void ApresentarPecas() {
 	for (int l=0; l<28; l++) {
@@ -20,17 +20,25 @@ void ApresentarPecas() {
 	printf("\n\n");
 }	
 
-void menu() {
-	printf("--------------MENU---------------\n");
-	printf("1 - Iniciar jogo (2 jogadores)\n");
-	printf("2 - Iniciar jogo (contra o computador)\n");
-	printf("3 - Retornar ao jogo interrompido\n");
-	printf("4 - Regras gerais do Jogo\n");
-	printf("5 - Salvar o jogo\n");
-	printf("6 - Recuperar o jogo salvo\n");
-	printf("0 - Sair do programa\n");
-	printf("Opcao selecionada: ");
-	scanf("%d", &op1);
+char menuInicial() {
+	do {
+		printf("--------------MENU---------------\n");
+		printf("1 - Iniciar jogo (2 jogadores)\n");
+		printf("2 - Iniciar jogo (contra o computador)\n");
+		printf("3 - Retornar ao jogo interrompido\n");
+		printf("4 - Regras gerais do Jogo\n");
+		printf("5 - Salvar o jogo\n");
+		printf("6 - Recuperar o jogo salvo\n");
+		printf("0 - Sair do programa\n");
+		printf("Opcao selecionada: ");
+		scanf("%c", &op1);	
+		
+		if (op >= '0' && op <= '6')
+			break;
+			
+		printf("Opcao invalida\n");		
+	} while (1);
+	return op; 
 }
 
 void submenu() {
@@ -52,6 +60,11 @@ void mesa() {
 
 void apresentar_1jogador() {
 	
+}
+
+void fclear() {
+	char carac;
+ 	while( (carac = fgetc(stdin)) != EOF && carac != '\n') {}
 }
 
 void limpaTela() {
