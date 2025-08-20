@@ -15,16 +15,11 @@
 #include "DOM-KLRR-VIEW.cpp"
 
 void jogar() {
-	Embaralhar();
-	ApresentarPecas();
-	Sleep(1000);
-	Embaralhar();
-	ApresentarPecas();
-	Sleep(1000);
-	Embaralhar();
-	ApresentarPecas();
-	Sleep(1000);
-//	menu();
+	prepararJogo();
+	//Embaralhar();
+	//ApresentarPecas();
+	//Sleep(1000);
+	//	menu();
 }
 
 //fun��es
@@ -40,12 +35,26 @@ void Embaralhar() {
 	}
 }
 
-void limpaTela() {
-	system("cls");
+void prepararJogo() {
+	Embaralhar();
+	Embaralhar();
+	Embaralhar();
+	
+	for (int i = 0; i < 27 ; i++) {
+		pecas[i].status = 0;
+		mesa[i].ladoD = -1;
+		mesa[i].ladoE = -1;
+	}
+	
+	for (int i = 0; i < 7; i++) {
+		pecas[i].status = '1';
+	}
+	
+	for (int i = 7; i < 13 ; i++) {
+		pecas[i].status = '2';
+	}
 }
 
-void teste() {
-	char op;
-	op = menuInicial();
-	switch(op)	
+void primeiroLance() {
+	
 }

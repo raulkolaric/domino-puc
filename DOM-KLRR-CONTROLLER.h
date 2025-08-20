@@ -10,3 +10,6 @@ void Embaralhar();
 void IniciarPecas();
 void ApresentaMensagem();
 void limpaTela();
+
+void prepararJogo();
+void primeiroLance();

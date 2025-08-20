@@ -1,20 +1,27 @@
-//DOM-KLRR-MODEL.h - Projeto Dominó
+//DOM-KLRR-MODEL.h - Projeto Dominï¿½
 //##-08-25 - Grupo: KLRR
-//Kauã Bezerra Brito
+//Kauï¿½ Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
 //Rodrigo Ward Leite
 
-void GerarPecas();
+//Variï¿½veis globais
+int mesaE, mesaD;	//Extremidades Esquerda e Direita da mesa
+int qtmesa; //qtde de pecas na mesa
+char jogadoratual;
 
-//Estrutura das peças
+//Estrutura das peï¿½as
 struct Peca {
 	int ladoA;
 	int ladoB;
 	char status;	//NULL, '1', '2', 'M'
-					//NULL = Disponível, 1= com jogador 1, 2 = com o jogador 2
+					//NULL = Disponï¿½vel, 1= com jogador 1, 2 = com o jogador 2
 } pecas[28];
 
-//Variáveis globais
-int mesaE, mesaD;	//Extremidades Esquerda e Direita da mesa
+struct Mesa
+{
+	int ladoE;
+	int ladoD;
+} mesa[28];
 
+void GerarPecas();

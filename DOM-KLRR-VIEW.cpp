@@ -34,12 +34,12 @@ char menuInicial() {
 		printf("Opcao selecionada: ");
 		scanf("%c", &op1);	
 		
-		if (op >= '0' && op <= '6')
+		if (op1 >= '0' && op1 <= '6')
 			break;
 			
 		printf("Opcao invalida\n");		
 	} while (1);
-	return op; 
+	return op1; 
 }
 
 char menuJogador() {
@@ -55,12 +55,11 @@ void apresentaMensagem(char mens[100]) {
 	printf("%s\n", mens);	
 }
 
-void mesa() {
-	
-	for (int l=0; l<pecaMesa; l++) {
-		printf("[%d|%d]	", pecas[l].ladoA, pecas[l].ladoB);
-	}
-}
+//void mesa() {
+	// for (int l=0; l<pecaMesa; l++) {
+	//	printf("[%d|%d]	", pecas[l].ladoA, pecas[l].ladoB);
+//	}
+//}
 
 void apresentar_1jogador() {
 	
