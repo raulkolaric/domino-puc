@@ -40,3 +40,6 @@ void Embaralhar () {
 	}
 }
 
+void limpaTela() {
+	system("cls");
+}
