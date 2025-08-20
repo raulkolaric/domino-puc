@@ -1,6 +1,6 @@
 //DOM-KLRR-CONTROLLER - Projeto Dominï¿½
 //##-08-25 - Grupo: KLRR
-//Kauï¿½ Bezerra Brito
+//Kauã Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
 //Rodrigo Ward Leite

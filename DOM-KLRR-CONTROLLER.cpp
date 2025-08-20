@@ -1,6 +1,6 @@
-//DOM-KLRR-CONTROLLER - Projeto Dominï¿½
+//DOM-KLRR-CONTROLLER - Projeto Dominó
 //##-08-25 - Grupo: KLRR
-//Kauï¿½ Bezerra Brito
+//Kauã Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
 //Rodrigo Ward Leite
@@ -19,10 +19,10 @@ void jogar() {
 	//Embaralhar();
 	//ApresentarPecas();
 	//Sleep(1000);
-	//	menu();
+	//menu();
 }
 
-//funï¿½ï¿½es
+//funções
 void Embaralhar() {
 	srand(time(0));
 	int n=28;
