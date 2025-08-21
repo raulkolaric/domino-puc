@@ -1,7 +1,7 @@
 //DOM-KLRR-MAIN - Projeto Dominó
 //##-08-25 - Grupo: KLRR
 //Kauã Bezerra Brito
-//Liam Vedovato Lopes
+//Liam Vedovato Lope
 //Raul Kolaric
 //Rodrigo Ward Leite
 
@@ -12,7 +12,7 @@
 
 int main(){
 	GerarPecas();
-	jogar();	
+	jogar();
 
 	apresentaMesa();
 }

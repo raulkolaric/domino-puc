@@ -22,6 +22,7 @@ struct Mesa
 {
 	int ladoE;
 	int ladoD;
+	char status; //'J', 'N'
 } mesa[28];
 
 void GerarPecas();

@@ -44,6 +44,7 @@ void prepararJogo() {
 		pecas[i].status = 0;
 		mesa[i].ladoD = -1;
 		mesa[i].ladoE = -1;
+		mesa[i].status = 'N';
 	}
 	
 	for (int i = 0; i < 7; i++) {

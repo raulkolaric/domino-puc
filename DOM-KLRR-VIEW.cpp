@@ -67,12 +67,20 @@ void apresentar_1jogador() {
 }
 
 void apresentaMesa() {
-	int tamanho = sizeof(mesa) / sizeof(mesa[0]);
+    // calcula tamanho do array 'mesa'
+    int tamanho = sizeof(mesa) / sizeof(mesa[0]);
+	printf("===========\n");
+	printf("M E S A	\n");
+    // imprime todas as peças do array
     for (int i = 0; i < tamanho; i++) {
-        printf("[%d|%d] ", mesa[i].ladoD, mesa[i].ladoE);
+        if (mesa[i].status == 'J') {
+			printf("[%d|%d] ", mesa[i].ladoD, mesa[i].ladoE);	
+		}
     }
+	printf("\n===========\n");
     printf("\n");
 }
+
  
 void fclear() {
 	char carac;
