@@ -40,7 +40,7 @@ void prepararJogo() {
 	Embaralhar();
 	Embaralhar();
 	
-	for (int i = 0; i < 27 ; i++) {
+	for (int i = 0; i < 28 ; i++) {
 		pecas[i].status = 0;
 		mesa[i].ladoD = -1;
 		mesa[i].ladoE = -1;
