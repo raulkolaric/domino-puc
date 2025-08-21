@@ -124,3 +124,25 @@ void primeiroLance() {
 		jogadoratual = '2';
 	}
 }
+
+void trocarJogador() {
+	
+	if(jogadoratual == '1') {
+		jogadoratual='2';
+	}
+	else {
+		jogadoratual='1';
+	}
+		
+}
+
+
+
+
+
+
+
+
+
+
+
