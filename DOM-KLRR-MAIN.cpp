@@ -13,4 +13,6 @@
 int main(){
 	GerarPecas();
 	jogar();	
+
+	apresentaMesa();
 }
