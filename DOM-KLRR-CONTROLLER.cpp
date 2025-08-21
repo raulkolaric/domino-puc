@@ -58,3 +58,25 @@ void prepararJogo() {
 void primeiroLance() {
 	
 }
+
+void trocarJogador() {
+	
+	if(jogadoratual == '1') {
+		jogadoratual='2';
+	}
+	else {
+		jogadoratual='1';
+	}
+		
+}
+
+
+
+
+
+
+
+
+
+
+

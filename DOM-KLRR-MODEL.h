@@ -8,7 +8,7 @@
 //Variáveis globais
 int mesaE, mesaD;	//Extremidades Esquerda e Direita da mesa
 int qtmesa; //qtde de pecas na mesa
-char jogadoratual;
+char jogadoratual; // 1 primeiro jogador 2 segundo jogador
 
 //Estrutura das peças
 struct Peca {
