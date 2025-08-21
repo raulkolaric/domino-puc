@@ -17,7 +17,7 @@
 void jogar() {
 	prepararJogo();
 	//Embaralhar();
-	//ApresentarPecas();
+	ApresentarPecas();
 	//Sleep(1000);
 	//menu();
 }
@@ -40,7 +40,7 @@ void prepararJogo() {
 	Embaralhar();
 	Embaralhar();
 	
-	for (int i = 0; i < 27 ; i++) {
+	for (int i = 0; i < 28 ; i++) {
 		pecas[i].status = 0;
 		mesa[i].ladoD = -1;
 		mesa[i].ladoE = -1;
@@ -57,4 +57,70 @@ void prepararJogo() {
 
 void primeiroLance() {
 	
+	//primeiro jogador
+	//Criação de variáveis
+	int a = 0;
+	int b = 0;
+	int c = 0;
+	int x = 0;
+	//Varredura das peças do jogador !
+	for (int i = 0; i < 7; i++) {
+		if (pecas[i].ladoA == pecas[i].ladoB) {					//Seleciona a peça que tiver os lados iguais
+			if ((pecas[i].ladoA + pecas[i].ladoB) > a) {		//A soma dos lados dessa peça vai ser atribuída à variável a
+				a = pecas[i].ladoA + pecas[i].ladoB;			//Caso tenha outra peça com os lados iguais, as somas dos lados vão ser comparados
+				x = i;
+			}
+			b = 1;	
+		}
+	}
+	
+	//Caso não tenha nenhuma peça com lados iguais, vai ter outra varredura 
+	if (b == 0) {
+		for (int i = 0; i < 7; i++) {
+			if ((pecas[i].ladoA + pecas[i].ladoB) > c) {
+				c = pecas[i].ladoA + pecas[i].ladoB;
+				x = 1;
+			}
+		}
+	}
+	
+	//segundo jogador
+	int d = 0;
+	int e = 0;
+	int f = 0;
+	int y = 0;
+	for (int i = 7; i < 13; i++) {
+		if (pecas[i].ladoA == pecas[i].ladoB) {
+			if ((pecas[i].ladoA + pecas[i].ladoB) > d) {
+				d = pecas[i].ladoA + pecas[i].ladoB;
+				y = i;
+			}
+			e = 1;	
+		}
+	}
+	
+	if (e == 0) {
+		for (int i = 7; i < 13; i++) {
+			if ((pecas[i].ladoA + pecas[i].ladoB) > f) {
+				f = pecas[i].ladoA + pecas[i].ladoB;
+				y = i;
+			}
+		}
+	}
+	
+	if (a > d) {
+		jogadoratual = '1';
+	}
+	
+	else if (d > a) {
+		jogadoratual = '2';
+	}
+	
+	else if (c > f) {
+		jogadoratual = '1';
+	}
+	
+	else if (f > c) {
+		jogadoratual = '2';
+	}
 }
