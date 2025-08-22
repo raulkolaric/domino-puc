@@ -16,10 +16,11 @@ int pecaMesa;
 
 void ApresentarPecas() {
 	for (int l=0; l<28; l++) {
-		printf("[%d|%d]	", pecas[l].ladoA, pecas[l].ladoB);
+		printf("[%d|%d]	", pecas[l].ladoA, pecas[l].ladoB);		
 	}
 	printf("\n\n");
-}	
+	}
+	
 
 char menuInicial() {
 	do {
@@ -65,6 +66,22 @@ void apresentar_1jogador() {
 	
 }
 
+void apresentaMesa() {
+    // calcula tamanho do array 'mesa'
+    int tamanho = sizeof(mesa) / sizeof(mesa[0]);
+	printf("===========\n");
+	printf("M E S A	\n");
+    // imprime todas as peças do array
+    for (int i = 0; i < tamanho; i++) {
+        if (mesa[i].status == 'J') {
+			printf("[%d|%d] ", mesa[i].ladoD, mesa[i].ladoE);	
+		}
+    }
+	printf("\n===========\n");
+    printf("\n");
+}
+
+ 
 void fclear() {
 	char carac;
  	while( (carac = fgetc(stdin)) != EOF && carac != '\n') {}
