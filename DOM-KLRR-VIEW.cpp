@@ -1,30 +1,59 @@
-//DOM-KLRR-VIEW - Projeto Dominó
-//##-08-25 - Grupo: KLRR
+//DOM-KLRR-VIEW.cpp - Projeto Dominó
+//26/08/25 - Grupo: KLRR
 //Kauã Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
 //Rodrigo Ward Leite
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-
 #include "DOM-KLRR-VIEW.h"
 
-char op1, op2;
-int pecaMesa;
+//Exibe uma mensagem de texto simples na tela
+void apresentarMensagem(char mens[100]) {
+	printf("%s\n", mens);	
+}
 
+//Variaveis para os Menus
+char op1, op2;
+
+//Exibe todas as 28 peças do dominó
 void ApresentarPecas() {
 	for (int l=0; l<28; l++) {
 		printf("[%d|%d]	", pecas[l].ladoA, pecas[l].ladoB);		
 	}
 	printf("\n\n");
-	}
-	
+}
 
+//Mostra a mesa atual (apenas peças já jogadas)
+void apresentarMesa() {
+   //Calcula o tamanho do array 'mesa'
+    int tamanho = sizeof(mesa) / sizeof(mesa[0]);
+    printf("                                        MESA                                          \n");
+	printf("======================================================================================\n");
+	
+    //Imprime todas as peças do array
+    for (int i = 0; i < tamanho; i++) {
+        if (mesa[i].status == 'J') {
+			printf("[%d|%d] ", mesa[i].ladoD, mesa[i].ladoE);	
+		}
+    }
+	printf("\n======================================================================================\n\n");
+}	
+
+//Limpa o buffer de entrada
+void fclear() {
+	char carac;
+ 	while( (carac = fgetc(stdin)) != EOF && carac != '\n') {}
+}
+
+//Limpa a tela do console
+void limparTela() {
+	system("cls");
+}
+
+//Exibe o menu principal e retorna a opção escolhida
 char menuInicial() {
 	do {
-		printf("--------------MENU---------------\n");
+		printf("-------------------MENU-------------------\n");
 		printf("1 - Iniciar jogo (2 jogadores)\n");
 		printf("2 - Iniciar jogo (contra o computador)\n");
 		printf("3 - Retornar ao jogo interrompido\n");
@@ -40,54 +69,44 @@ char menuInicial() {
 			
 		printf("Opcao invalida\n");		
 	} while (1);
+	
 	return op1; 
 }
 
+//Exibe o menu de jogadas dentro da partida
 char menuJogador() {
-	printf("J - Jogar (possíveis n1 ou n2)");
-	printf("C - Comprar");
-	printf("P – Passar");
-	printf("S – Sair (interromper o jogo voltando ao menu inicial)");
-	printf("Opcao selecionada: ");
-	scanf("%c", &op2);
-}
-
-void apresentaMensagem(char mens[100]) {
-	printf("%s\n", mens);	
-}
-
-//void mesa() {
-	// for (int l=0; l<pecaMesa; l++) {
-	//	printf("[%d|%d]	", pecas[l].ladoA, pecas[l].ladoB);
-//	}
-//}
-
-void apresentar_1jogador() {
-	
-}
-
-void apresentaMesa() {
-    // calcula tamanho do array 'mesa'
-    int tamanho = sizeof(mesa) / sizeof(mesa[0]);
-	printf("===========\n");
-	printf("M E S A	\n");
-    // imprime todas as peças do array
-    for (int i = 0; i < tamanho; i++) {
-        if (mesa[i].status == 'J') {
-			printf("[%d|%d] ", mesa[i].ladoD, mesa[i].ladoE);	
+	fclear();
+	do {
+		printf("\nJ - Jogar (possíveis n1 ou n2)\n");
+		printf("C - Comprar\n");
+		printf("P - Passar\n");
+		printf("S - Sair (interromper o jogo voltando ao menu inicial)\n");
+		printf("Opcao selecionada: ");
+		scanf("%c", &op2);
+		
+		if ((op2 == 'J') || (op2 == 'C') || (op2 == 'P') || (op2 == 'S')) {
+			break;
 		}
-    }
-	printf("\n===========\n");
-    printf("\n");
+		
+		printf("Opcao invalida\n");	
+	} while (1);
+	
+	return op2;
 }
 
- 
-void fclear() {
-	char carac;
- 	while( (carac = fgetc(stdin)) != EOF && carac != '\n') {}
+//Exibe as regras resumidas do dominó
+void regras() {
+	printf("\n-------------------------------------------------Regras-resumidas-do-Domino-------------------------------------------------\n");
+	printf("1 - Distribuicao inicial: Cada jogador comeca com 7 pecas. As demais ficam no “monte” para compra.\n");
+	printf("2 - Inicio do jogo: Comeca quem tiver o [6|6]. Se ninguem tiver, vale a peca de numero duplo mais alto (ex: [5|5], [4|4]...).\n");
+	printf("3 - Sentido do jogo: O jogo segue em sentido anti-horario.\n");
+	printf("4 - Como jogar:\n");
+	printf("    O jogador deve colocar uma peca que combine com uma das extremidades abertas da mesa.\n");
+	printf("    Se nao tiver peca compativel, deve comprar do monte ate conseguir jogar.\n");
+	printf("    Se o monte acabar e nao for possivel jogar, o jogador passa a vez.\n");
+	printf("5 - Final do turno: Assim que o jogador coloca sua peca, a vez passa ao proximo.\n");
+	printf("6 - Fim da partida:\n");
+	printf("    Se alguem colocar sua ultima peça, vence automaticamente (“bater”).\n");
+	printf("    Se o jogo “travar” (ninguem pode jogar e nao ha peças no monte), vence quem tiver menos pecas.\n");
+	printf("    Em caso de empate, vence quem tiver a menor soma dos pontos nas pecas restantes.\n");
 }
-
-void limpaTela() {
-	system("cls");
-}
-

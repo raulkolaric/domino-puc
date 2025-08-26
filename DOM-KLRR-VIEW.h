@@ -1,16 +1,20 @@
-//DOM-KLRR-VIEW - Projeto Dominó
-//##-08-25 - Grupo: KLRR
+//DOM-KLRR-VIEW.h - Projeto Dominó
+//26/08/25 - Grupo: KLRR
 //Kauã Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
 //Rodrigo Ward Leite
 
+//Bibliotecas necessárias
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+//Declarações das funções de interface
+void apresentarMensagem(char mens[100]);
+void apresentarMesa();
+void fclear();
+void limparTela();
 char menuInicial();
 char menuJogador();
-//void mesa();
-void apresentaMensagem(char mens[100]);
-void apresentar_1jogador(); 
-void ApresentarPecas();
-void fclear();
-void limpaTela();
-void apresentaMesa();
+void regras();

@@ -1,45 +1,86 @@
-//DOM-KLRR-CONTROLLER - Projeto Dominó
-//##-08-25 - Grupo: KLRR
+//DOM-KLRR-CONTROLLER.cpp - Projeto Dominó
+//26/08/25 - Grupo: KLRR
 //Kauã Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
 //Rodrigo Ward Leite
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <iostream>
-#include <windows.h>
-
 #include "DOM-KLRR-CONTROLLER.h"
 #include "DOM-KLRR-VIEW.cpp"
 
-void jogar() {
-	prepararJogo();
-	//Embaralhar();
-	ApresentarPecas();
-	//Sleep(1000);
-	//menu();
-}
-
-//funções
-void Embaralhar() {
-	srand(time(0));
-	int n=28;
+//Ebaralha as peças de dominó
+void embaralhar() {
+	srand(time(0));						// Inicializa o gerador de números aleatórios
+	int n = 28;			
 	struct Peca temp;
-	for(int i=n-1;i>0;i--) {
+	for(int i = n - 1; i > 0; i--) {
 		int j = rand()%(n);
-		temp=pecas[i];
-		pecas[i]=pecas[j];
-		pecas[j]=temp;
+		temp = pecas[i];
+		pecas[i] = pecas[j];
+		pecas[j] = temp;
 	}
 }
 
-void prepararJogo() {
-	Embaralhar();
-	Embaralhar();
-	Embaralhar();
+//Função principal de controle das jogadas e menus
+void jogar() {
+	menuInicial();
 	
+	switch (op1) {
+		case('1'): 
+			prepararJogo();
+			
+			menuJogador();
+			
+			switch(op2) {
+				case('J'):
+					
+					break;
+				
+				case('C'):
+					
+					break;
+				
+				case('P'):
+					
+					break;
+				
+				case('S'):
+					break;
+			}
+						
+			break;
+			
+		case('2'): 
+			
+			break;
+			
+		case('3'): 
+			
+			break;
+			
+		case('4'): 
+			regras();
+		
+			break;
+		
+		case('5'): 
+			
+			break;
+		
+		case('6'): 
+	
+			break;
+		
+		case('0'):
+			break;
+	}
+}
+
+//Prepara o início do jogo: embaralha, distribui peças e define quem joga primeiro
+void prepararJogo() {
+	embaralhar();
+	
+	//Inicializa peças e mesa
 	for (int i = 0; i < 28 ; i++) {
 		pecas[i].status = 0;
 		mesa[i].ladoD = -1;
@@ -47,103 +88,107 @@ void prepararJogo() {
 		mesa[i].status = 'N';
 	}
 	
+	//Distribui peças para jogador 1
 	for (int i = 0; i < 7; i++) {
 		pecas[i].status = '1';
 	}
 	
-	for (int i = 7; i < 13 ; i++) {
+	//Distribui peças para jogador 2
+	for (int i = 7; i < 14 ; i++) {
 		pecas[i].status = '2';
 	}
+	
+	primeiroLance();
+	
+	limparTela();
+	
+	printf("O jogador %d fez o primeiro lance.\n\n", jogadorAtual);
+	
+	apresentarMesa();
+	
+	trocarJogador();
+	
+	iniciarJogo();
 }
 
-void primeiroLance() {
+//Define quem será o primeiro a jogar - Critério: maior duplo ou, se não houver, maior soma
+int primeiroLance() {
+	int j = 0, k;										// j = valor da maior peça encontrada, k = índice
 	
-	//primeiro jogador
-	//Criação de variáveis
-	int a = 0;
-	int b = 0;
-	int c = 0;
-	int x = 0;
-	//Varredura das peças do jogador !
-	for (int i = 0; i < 7; i++) {
-		if (pecas[i].ladoA == pecas[i].ladoB) {					//Seleciona a peça que tiver os lados iguais
-			if ((pecas[i].ladoA + pecas[i].ladoB) > a) {		//A soma dos lados dessa peça vai ser atribuída à variável a
-				a = pecas[i].ladoA + pecas[i].ladoB;			//Caso tenha outra peça com os lados iguais, as somas dos lados vão ser comparados
-				x = i;
-			}
-			b = 1;	
-		}
-	}
-	
-	//Caso não tenha nenhuma peça com lados iguais, vai ter outra varredura 
-	if (b == 0) {
-		for (int i = 0; i < 7; i++) {
-			if ((pecas[i].ladoA + pecas[i].ladoB) > c) {
-				c = pecas[i].ladoA + pecas[i].ladoB;
-				x = 1;
-			}
-		}
-	}
-	
-	//segundo jogador
-	int d = 0;
-	int e = 0;
-	int f = 0;
-	int y = 0;
-	for (int i = 7; i < 13; i++) {
+	//Procura o maior duplo (ex: 6-6, 5-5, etc.)
+	for (int i = 0; i < 14; i++) {
 		if (pecas[i].ladoA == pecas[i].ladoB) {
-			if ((pecas[i].ladoA + pecas[i].ladoB) > d) {
-				d = pecas[i].ladoA + pecas[i].ladoB;
-				y = i;
-			}
-			e = 1;	
-		}
-	}
-	
-	if (e == 0) {
-		for (int i = 7; i < 13; i++) {
-			if ((pecas[i].ladoA + pecas[i].ladoB) > f) {
-				f = pecas[i].ladoA + pecas[i].ladoB;
-				y = i;
+			if((pecas[i].ladoA + pecas[i].ladoB) > j) {
+				j = pecas[i].ladoA + pecas[i].ladoB;
+				k = i;
 			}
 		}
 	}
 	
-	if (a > d) {
-		jogadoratual = '1';
+	//Caso nenhum duplo tenha sido encontrado
+	if (j == 0) {
+		for (int i = 0; i < 14; i++) {
+			if((pecas[i].ladoA + pecas[i].ladoB) > j) {
+				j = pecas[i].ladoA + pecas[i].ladoB;
+				k = i;
+			}
+		}
 	}
 	
-	else if (d > a) {
-		jogadoratual = '2';
+	//Coloca a peça escolhida na mesa
+	mesa[0].ladoE = pecas[k].ladoA;
+	mesa[0].ladoD = pecas[k].ladoB;
+	mesa[0].status = 'J';
+	pecas[k].status = 'M';
+	qtMesa = 1;
+	
+	//Define quem foi o jogador que colocou a peça
+	if (k < 7) {
+		jogadorAtual = 1;	
 	}
 	
-	else if (c > f) {
-		jogadoratual = '1';
+	else {
+		jogadorAtual = 2;
 	}
 	
-	else if (f > c) {
-		jogadoratual = '2';
-	}
+	return jogadorAtual;
 }
 
+//Alterna entre jogador 1 e jogador 2
 void trocarJogador() {
 	
-	if(jogadoratual == '1') {
-		jogadoratual='2';
+	if (jogadorAtual == 1) {
+		jogadorAtual = 2;
 	}
+	
 	else {
-		jogadoratual='1';
+		jogadorAtual = 1;
 	}
 		
 }
 
-
-
-
-
-
-
-
-
-
-
+//Mostra as peças do jogador atual na tela
+void iniciarJogo() {
+	printf("\n");
+	
+	if (jogadorAtual == 1) {
+		printf("JOGADOR 1\n");
+		
+		for (int i = 0; i < 28; i++) {
+			if (pecas[i].status == '1') {
+				printf("[%d|%d] ", pecas[i].ladoA, pecas[i].ladoB);
+			}
+		}
+	}
+	
+	else {
+		printf("JOGADOR 2\n");
+		for (int i = 0; i < 28; i++) {
+			if (pecas[i].status == '2') {
+				printf("[%d|%d] ", pecas[i].ladoA, pecas[i].ladoB);
+			}
+		}
+	}
+	
+	printf("\n");
+}
