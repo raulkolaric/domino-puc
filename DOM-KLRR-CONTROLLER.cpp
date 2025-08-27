@@ -33,7 +33,7 @@ void jogar() {
 			
 			switch(op2) {
 				case('J'):
-					
+					//selecionar peça 
 					break;
 				
 				case('C'):
