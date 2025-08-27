@@ -33,7 +33,18 @@ void jogar() {
 			
 			switch(op2) {
 				case('J'):
-					//selecionar peça 
+					//buscar peças dos extremos
+					//mesaD, mesaE
+					/*mesaE = mesa[0].ladoE;
+					
+					for (int i = 0; i < 28 ; i++) {
+						if(mesa[i].status = 0) {
+							mesaD=mesa[i-1].ladoD;
+							break;
+						}
+					}*/
+					
+					
 					break;
 				
 				case('C'):
@@ -142,6 +153,8 @@ int primeiroLance() {
 	pecas[k].status = 'M';
 	qtMesa = 1;
 	
+
+	
 	//Define quem foi o jogador que colocou a peça
 	if (k < 7) {
 		jogadorAtual = 1;	
@@ -150,6 +163,18 @@ int primeiroLance() {
 	else {
 		jogadorAtual = 2;
 	}
+	
+	//determina os extremos
+	mesaE = mesa[0].ladoE;	
+	int r=0,i=0;				
+	while(r==0) {
+		if(mesa[i].status == 'N') {
+			mesaD=mesa[i-1].ladoD;
+			r=1;
+		}
+		i++;
+	}
+	
 	
 	return jogadorAtual;
 }

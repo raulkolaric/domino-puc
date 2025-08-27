@@ -77,7 +77,7 @@ char menuInicial() {
 char menuJogador() {
 	fclear();
 	do {
-		printf("\nJ - Jogar (possíveis n1 ou n2)\n");
+		printf("\nJ - Jogar (possíveis %d ou %d)\n",mesaE,mesaD);
 		printf("C - Comprar\n");
 		printf("P - Passar\n");
 		printf("S - Sair (interromper o jogo voltando ao menu inicial)\n");
