@@ -23,57 +23,88 @@ void embaralhar() {
 
 //Função principal de controle das jogadas e menus
 void jogar() {
-	menuInicial();
+	do {
+		menuInicial();
 	
-	switch (op1) {
-		case('1'): 
-			prepararJogo();
-			
-			menuJogador();
-			
-			switch(op2) {
-				case('J'):
-					
-					break;
+		switch (op1) {
+			case('1'): 
+				prepararJogo();
 				
-				case('C'):
-					
-					break;
+				do {
+					menuJogador();
 				
-				case('P'):
+					switch(op2) {
+						case('J'):
+							
+							limparTela();
+							break;
 					
-					break;
-				
-				case('S'):
-					break;
-			}
+						case('C'):	
+							for (int i = 14; i < 28; i++) {
+								if (pecas[i].status == 0) {
+									if (jogadorAtual == 1) {
+										pecas[i].status = '1';
+									}
+									
+									else {
+										pecas[i].status = '2';
+									}
+									
+									break;
+								}
+							}
+							
+							limparTela();
+							apresentarMesa();
+							iniciarJogo();
 						
-			break;
+							break;
+				
+						case('P'):
+							limparTela();
+							trocarJogador();
+							apresentarMesa();
+							iniciarJogo();
+							break;
+				
+						case('S'):
+							limparTela();
+							break;
+					}
+				} while (op2 != 'S');
+				
+				limparTela();
+						
+				break;
 			
-		case('2'): 
+			case('2'): 
 			
-			break;
+				break;
 			
-		case('3'): 
+			case('3'): 
 			
-			break;
+				break;
 			
-		case('4'): 
-			regras();
+			case('4'): 
+				limparTela();
+				regras();
 		
-			break;
+				break;
 		
-		case('5'): 
+			case('5'): 
 			
-			break;
+				break;
 		
-		case('6'): 
+			case('6'): 
 	
-			break;
+				break;
 		
-		case('0'):
-			break;
-	}
+			case('0'):
+				break;
+		}
+		
+		limparTela();
+	} while (op1 != '0');
 }
 
 //Prepara o início do jogo: embaralha, distribui peças e define quem joga primeiro
@@ -113,7 +144,7 @@ void prepararJogo() {
 
 //Define quem será o primeiro a jogar - Critério: maior duplo ou, se não houver, maior soma
 int primeiroLance() {
-	int j = 0, k;										// j = valor da maior peça encontrada, k = índice
+	int j = -1, k;										// j = valor da maior peça encontrada, k = índice
 	
 	//Procura o maior duplo (ex: 6-6, 5-5, etc.)
 	for (int i = 0; i < 14; i++) {
@@ -126,7 +157,7 @@ int primeiroLance() {
 	}
 	
 	//Caso nenhum duplo tenha sido encontrado
-	if (j == 0) {
+	if (j == -1) {
 		for (int i = 0; i < 14; i++) {
 			if((pecas[i].ladoA + pecas[i].ladoB) > j) {
 				j = pecas[i].ladoA + pecas[i].ladoB;
