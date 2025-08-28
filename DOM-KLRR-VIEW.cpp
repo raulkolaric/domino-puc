@@ -42,7 +42,7 @@ void apresentarMesa() {
 //Limpa o buffer de entrada
 void fclear() {
 	char carac;
- 	while( (carac = fgetc(stdin)) != EOF && carac != '\n') {}
+ 	while((carac = fgetc(stdin)) != EOF && carac != '\n') {}
 }
 
 //Limpa a tela do console
@@ -53,7 +53,8 @@ void limparTela() {
 //Exibe o menu principal e retorna a opção escolhida
 char menuInicial() {
 	do {
-		printf("-------------------MENU-------------------\n");
+		limparTela();
+		printf("\n-------------------MENU-------------------\n");
 		printf("1 - Iniciar jogo (2 jogadores)\n");
 		printf("2 - Iniciar jogo (contra o computador)\n");
 		printf("3 - Retornar ao jogo interrompido\n");
@@ -67,16 +68,22 @@ char menuInicial() {
 		if (op1 >= '0' && op1 <= '6')
 			break;
 			
-		printf("Opcao invalida\n");		
+		printf("Opcao invalida\n");	
+		system("pause");
+		fclear();
 	} while (1);
 	
+	fclear();
 	return op1; 
 }
 
 //Exibe o menu de jogadas dentro da partida
 char menuJogador() {
-	fclear();
 	do {
+		limparTela();
+		apresentarMesa();
+		iniciarJogo();
+		
 		printf("\nJ - Jogar (possíveis %d ou %d)\n",mesaE,mesaD);
 		printf("C - Comprar\n");
 		printf("P - Passar\n");
@@ -88,9 +95,12 @@ char menuJogador() {
 			break;
 		}
 		
-		printf("Opcao invalida\n");	
+		printf("Opcao invalida\n");
+		system("pause");
+		fclear();	
 	} while (1);
-	
+
+	fclear();
 	return op2;
 }
 
@@ -109,4 +119,5 @@ void regras() {
 	printf("    Se alguem colocar sua ultima peça, vence automaticamente (“bater”).\n");
 	printf("    Se o jogo “travar” (ninguem pode jogar e nao ha peças no monte), vence quem tiver menos pecas.\n");
 	printf("    Em caso de empate, vence quem tiver a menor soma dos pontos nas pecas restantes.\n");
+	system("pause");
 }
