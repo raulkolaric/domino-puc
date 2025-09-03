@@ -336,32 +336,43 @@ void jogarNaMesa() {
 	
 }
 
-void fopen("SALVAR", "w"){
-	FILE *fp; //define um ponteiro fipo FILE (está em <stdio.h>)
-	if (fp = fopen("ARQTESTE", "w") == NULL) {
-		printf("O arquivo ARQTESTE não pode ser aberto para gravação\n";)
-		exit(0);
-	}
+void fcriarArquivo(){
+    FILE *fp;
+
+    if ((fp = fopen("ARQTESTE", "w")) == NULL) {
+        printf("O arquivo ARQTESTE não pode ser aberto para gravação\n");
+        exit(1);
+    }
+
+    for (int i = 0; i < total; i++) {
+        if (fwrite(&pecas[i], sizeof(struct Peca), 1, fp) != 1) {
+            printf("Erro na gravacao do arquivo ARQTESTE\n");
+            break;
+        }
+    }
+
+    fclose(fp);
+    printf("Arquivo gravado com sucesso!\n");
 }
 
-void fwrite("SALVAR", "w"){
-	FILE *fp; //define um ponteiro fipo FILE (está em <stdio.h>)
-	if (fp = fopen("ARQTESTE", "r") == NULL) {
-		printf("O arquivo ARQTESTE não pode ser aberto para leitura\n";)
-		exit(0);
-	}
-}
-
-void fread("SALVAR"){
-	FILE *fp; //define um ponteiro fipo FILE (está em <stdio.h>)
-}
-
-void fclose("SALVAR"){
-	FILE *fp; //define um ponteiro fipo FILE (está em <stdio.h>)
-	for(i = 0; i<28, i++) {
-		if (fwrite(&pecas[i]), sizeof(struct Peca), 1, fp) != 1) {
-			printf("Erro na eitura do arquivo ARQTESTE");
-		}	
-	}
-}
+//void fwrite("SALVAR", "w"){
+//	FILE *fp; //define um ponteiro fipo FILE (está em <stdio.h>)
+//	if (fp = fopen("ARQTESTE", "r") == NULL) {
+//		printf("O arquivo ARQTESTE não pode ser aberto para leitura\n";)
+//		exit(0);
+//	}
+//}
+//
+//void fread("SALVAR"){
+//	FILE *fp; //define um ponteiro fipo FILE (está em <stdio.h>)
+//}
+//
+//void fclose("SALVAR"){
+//	FILE *fp; //define um ponteiro fipo FILE (está em <stdio.h>)
+//	for(i = 0; i<28, i++) {
+//		if (fwrite(&pecas[i]), sizeof(struct Peca), 1, fp) != 1) {
+//			printf("Erro na eitura do arquivo ARQTESTE");
+//		}	
+//	}
+//}
 
