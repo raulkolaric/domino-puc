@@ -35,8 +35,11 @@ void jogar() {
 				
 					switch(op2) {
 						case('J'):
-							
-							limparTela();
+							jogarNaMesa();						
+							system("pause");
+							fclear();	
+							trocarJogador();
+								
 							break;
 					
 						case('C'):	
@@ -135,6 +138,8 @@ void prepararJogo() {
 	
 	printf("O jogador %d fez o primeiro lance.\n\n", jogadorAtual);
 	
+	system("pause");
+	
 	apresentarMesa();
 	
 	trocarJogador();
@@ -183,11 +188,11 @@ int primeiroLance() {
 	}
 	
 	mesaE = mesa[0].ladoE;	
-	int r=0,i=0;				
-	while(r==0) {
+	int r = 0, i = 0;				
+	while (r == 0) {
 		if(mesa[i].status == 'N') {
-			mesaD=mesa[i-1].ladoD;
-			r=1;
+			mesaD = mesa[i-1].ladoD;
+			r = 1;
 		}
 		i++;
 	}
@@ -217,7 +222,7 @@ void iniciarJogo() {
 		
 		for (int i = 0; i < 28; i++) {
 			if (pecas[i].status == '1') {
-				printf("[%d|%d] ", pecas[i].ladoA, pecas[i].ladoB);
+				printf("%d.[%d|%d] ", i, pecas[i].ladoA, pecas[i].ladoB);
 			}
 		}
 	}
@@ -226,10 +231,107 @@ void iniciarJogo() {
 		printf("JOGADOR 2\n");
 		for (int i = 0; i < 28; i++) {
 			if (pecas[i].status == '2') {
-				printf("[%d|%d] ", pecas[i].ladoA, pecas[i].ladoB);
+				printf("%d.[%d|%d]  ", i, pecas[i].ladoA, pecas[i].ladoB);
 			}
 		}
 	}
 	
 	printf("\n");
+}
+
+void jogarNaMesa() {
+	int i, lado, ladoEsquerdo = 0, ladoDireito = 0;
+
+	printf("Índice da peça selecionada: ");
+	scanf("%d", &i);
+	
+	if (pecas[i].ladoA == mesaE || pecas[i].ladoB == mesaE) {
+		ladoEsquerdo = 1;
+	}
+	
+	if (pecas[i].ladoA == mesaD || pecas[i].ladoB == mesaD) {
+		ladoDireito = 1;
+	}
+	
+	if (ladoEsquerdo == 0 && ladoDireito == 0) {
+		printf("Peca invalida.\n\n");
+	}
+	
+	else if (ladoEsquerdo == 0 && ladoDireito == 1) {
+		if (pecas[i].ladoA == mesaD) {
+			mesa[qtMesa].ladoE = pecas[i].ladoA;
+			mesa[qtMesa].ladoD = pecas[i].ladoB;
+			mesaD = pecas[i].ladoB;
+		}
+		
+		else {
+			mesa[qtMesa].ladoE = pecas[i].ladoB;
+			mesa[qtMesa].ladoD = pecas[i].ladoA;
+			mesaD = pecas[i].ladoA;
+		}
+		
+		mesa[qtMesa].status = 'J';
+		pecas[i].status = 'M';
+		qtMesa++;
+	}
+	
+	else if (ladoEsquerdo == 1 && ladoDireito == 0) {
+		for (int j = qtMesa; j = 1; j--) {
+			mesa[j - 1].ladoD = mesa[j].ladoD;
+			mesa[j - 1].ladoE = mesa[j].ladoE;
+			
+			if (mesa[j - 1].status == 'J') {
+				mesa[j].status = 'J';
+			}
+		}
+		
+		if (pecas[i].ladoA == mesaE) {
+			mesa[0].ladoE = pecas[i].ladoB;
+			mesa[0].ladoD = pecas[i].ladoA;
+			mesaE = pecas[i].ladoB;
+		}
+		
+		else {
+			mesa[0].ladoE = pecas[i].ladoA;
+			mesa[0].ladoD = pecas[i].ladoB;
+			mesaE = pecas[i].ladoA;
+		}
+		
+		mesa[qtMesa].status = 'J';
+		pecas[i].status = 'M';
+		qtMesa++;
+	}
+	
+	else if (ladoEsquerdo == 1 && ladoDireito == 1) {
+		printf("Qual lado? (Direito - 1, Esquerdo - 2): ");
+		scanf("%d", &lado);
+		
+		if (lado == 1) {
+			if (pecas[i].ladoA == mesaD) {
+				mesa[qtMesa].ladoE = pecas[i].ladoA;
+				mesa[qtMesa].ladoD = pecas[i].ladoB;
+				mesaD = pecas[i].ladoB;
+			}
+		
+			else {
+				mesa[qtMesa].ladoE = pecas[i].ladoB;
+				mesa[qtMesa].ladoD = pecas[i].ladoA;
+				mesaD = pecas[i].ladoA;
+			}
+			
+			mesa[qtMesa].status = 'J';
+			pecas[i].status = 'M';
+			qtMesa++;
+		}
+	}
+	
+	//validar os lados da mesa com a peca selecionada
+	
+	//comparar os lados da mesa com a pesa
+	//se possivel os 2, fazer escolha
+	//senao jogar onde e valido
+	
+	//mudar a extremidade da mesa
+	
+	
 }

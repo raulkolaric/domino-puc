@@ -9,7 +9,7 @@
 #include "DOM-KLRR-CONTROLLER.cpp"
 
 //Função principal do programa
-int main(){
+int main() {
 	gerarPecas();				//Cria todas as 28 peças do dominó
 	jogar();					//Inicia o fluxo do jogo (menu + lógica)
 }

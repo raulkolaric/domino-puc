@@ -33,7 +33,7 @@ void apresentarMesa() {
     //Imprime todas as peças do array
     for (int i = 0; i < tamanho; i++) {
         if (mesa[i].status == 'J') {
-			printf("[%d|%d] ", mesa[i].ladoD, mesa[i].ladoE);	
+			printf("[%d|%d] ", mesa[i].ladoE, mesa[i].ladoD);	
 		}
     }
 	printf("\n======================================================================================\n\n");
@@ -68,7 +68,7 @@ char menuInicial() {
 		if (op1 >= '0' && op1 <= '6')
 			break;
 			
-		printf("Opcao invalida\n");	
+		printf("Opcao invalida\n\n");	
 		system("pause");
 		fclear();
 	} while (1);
@@ -84,7 +84,7 @@ char menuJogador() {
 		apresentarMesa();
 		iniciarJogo();
 		
-		printf("\nJ - Jogar (possíveis %d ou %d)\n",mesaE,mesaD);
+		printf("\nJ - Jogar (possíveis %d ou %d)\n", mesaE, mesaD);
 		printf("C - Comprar\n");
 		printf("P - Passar\n");
 		printf("S - Sair (interromper o jogo voltando ao menu inicial)\n");
@@ -95,7 +95,7 @@ char menuJogador() {
 			break;
 		}
 		
-		printf("Opcao invalida\n");
+		printf("Opcao invalida\n\n");
 		system("pause");
 		fclear();	
 	} while (1);
