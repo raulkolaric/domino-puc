@@ -6,6 +6,7 @@
 //Rodrigo Ward Leite
 
 //Bibliotecas padrão
+#include <ctype.h>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>

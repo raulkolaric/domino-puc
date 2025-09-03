@@ -36,7 +36,7 @@ void apresentarMesa() {
 			printf("[%d|%d] ", mesa[i].ladoE, mesa[i].ladoD);	
 		}
     }
-	printf("\n======================================================================================\n\n");
+	printf("\n======================================================================================\n");
 }	
 
 //Limpa o buffer de entrada
@@ -90,6 +90,7 @@ char menuJogador() {
 		printf("S - Sair (interromper o jogo voltando ao menu inicial)\n");
 		printf("Opcao selecionada: ");
 		scanf("%c", &op2);
+		op2 = toupper(op2);
 		
 		if ((op2 == 'J') || (op2 == 'C') || (op2 == 'P') || (op2 == 'S')) {
 			break;

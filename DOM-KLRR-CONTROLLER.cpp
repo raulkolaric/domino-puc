@@ -303,9 +303,12 @@ void jogarNaMesa() {
 	}
 	
 	else if (ladoEsquerdo == 1 && ladoDireito == 1) {
-		printf("Qual lado? (D - Direito, E - Esquerdo): ");
-		scanf(" %c", &lado);
-		
+		do {
+			printf("Qual lado? (D - Direito, E - Esquerdo): ");
+			scanf(" %c", &lado);
+			lado = toupper(lado);
+		} while(lado != 'D' && lado != 'E');
+	
 		if (lado == 'D') {
 			if (pecas[i].ladoA == mesaD) {
 				mesa[qtMesa].ladoE = pecas[i].ladoA;
@@ -324,7 +327,7 @@ void jogarNaMesa() {
 			qtMesa++;
 		}
 		
-		else {
+		else if (lado == 'E'){
 			for (int j = qtMesa; j > 0; j--) {
 				mesa[j].ladoD = mesa[j - 1].ladoD;
 				mesa[j].ladoE = mesa[j - 1].ladoE;
