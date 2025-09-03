@@ -38,8 +38,7 @@ void jogar() {
 							jogarNaMesa();						
 							system("pause");
 							fclear();	
-							trocarJogador();
-								
+							trocarJogador();	
 							break;
 					
 						case('C'):	
@@ -191,7 +190,7 @@ int primeiroLance() {
 	int r = 0, i = 0;				
 	while (r == 0) {
 		if(mesa[i].status == 'N') {
-			mesaD = mesa[i-1].ladoD;
+			mesaD = mesa[i - 1].ladoD;
 			r = 1;
 		}
 		i++;
@@ -240,9 +239,10 @@ void iniciarJogo() {
 }
 
 void jogarNaMesa() {
-	int i, lado, ladoEsquerdo = 0, ladoDireito = 0;
-
-	printf("Índice da peça selecionada: ");
+	int i, ladoEsquerdo = 0, ladoDireito = 0;
+	char lado;
+	
+	printf("Indice da peca selecionada: ");
 	scanf("%d", &i);
 	
 	if (pecas[i].ladoA == mesaE || pecas[i].ladoB == mesaE) {
@@ -276,9 +276,9 @@ void jogarNaMesa() {
 	}
 	
 	else if (ladoEsquerdo == 1 && ladoDireito == 0) {
-		for (int j = qtMesa; j = 1; j--) {
-			mesa[j - 1].ladoD = mesa[j].ladoD;
-			mesa[j - 1].ladoE = mesa[j].ladoE;
+		for (int j = qtMesa; j > 0; j--) {
+			mesa[j].ladoD = mesa[j - 1].ladoD;
+			mesa[j].ladoE = mesa[j - 1].ladoE;
 			
 			if (mesa[j - 1].status == 'J') {
 				mesa[j].status = 'J';
@@ -303,10 +303,10 @@ void jogarNaMesa() {
 	}
 	
 	else if (ladoEsquerdo == 1 && ladoDireito == 1) {
-		printf("Qual lado? (Direito - 1, Esquerdo - 2): ");
-		scanf("%d", &lado);
+		printf("Qual lado? (D - Direito, E - Esquerdo): ");
+		scanf(" %c", &lado);
 		
-		if (lado == 1) {
+		if (lado == 'D') {
 			if (pecas[i].ladoA == mesaD) {
 				mesa[qtMesa].ladoE = pecas[i].ladoA;
 				mesa[qtMesa].ladoD = pecas[i].ladoB;
@@ -317,6 +317,33 @@ void jogarNaMesa() {
 				mesa[qtMesa].ladoE = pecas[i].ladoB;
 				mesa[qtMesa].ladoD = pecas[i].ladoA;
 				mesaD = pecas[i].ladoA;
+			}
+			
+			mesa[qtMesa].status = 'J';
+			pecas[i].status = 'M';
+			qtMesa++;
+		}
+		
+		else {
+			for (int j = qtMesa; j > 0; j--) {
+				mesa[j].ladoD = mesa[j - 1].ladoD;
+				mesa[j].ladoE = mesa[j - 1].ladoE;
+				
+				if (mesa[j - 1].status == 'J') {
+					mesa[j].status = 'J';
+				}
+			}
+			
+			if (pecas[i].ladoA == mesaE) {
+				mesa[0].ladoE = pecas[i].ladoB;
+				mesa[0].ladoD = pecas[i].ladoA;
+				mesaE = pecas[i].ladoB;
+			}
+			
+			else {
+				mesa[0].ladoE = pecas[i].ladoA;
+				mesa[0].ladoD = pecas[i].ladoB;
+				mesaE = pecas[i].ladoA;
 			}
 			
 			mesa[qtMesa].status = 'J';

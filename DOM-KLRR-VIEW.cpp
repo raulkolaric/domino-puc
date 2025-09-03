@@ -84,7 +84,7 @@ char menuJogador() {
 		apresentarMesa();
 		iniciarJogo();
 		
-		printf("\nJ - Jogar (possíveis %d ou %d)\n", mesaE, mesaD);
+		printf("\nJ - Jogar (possiveis %d ou %d)\n", mesaE, mesaD);
 		printf("C - Comprar\n");
 		printf("P - Passar\n");
 		printf("S - Sair (interromper o jogo voltando ao menu inicial)\n");
