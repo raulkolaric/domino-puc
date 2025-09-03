@@ -20,3 +20,22 @@ void gerarPecas() {
 		}
 	}	
 }
+
+if (fp = fopen("ARQTESTE", "w") == NULL) {
+	printf("O arquivo ARQTESTE não pode ser aberto para gravação\n";)
+	exit(0);
+}
+
+if (fp = fopen("ARQTESTE", "r") == NULL) {
+	printf("O arquivo ARQTESTE não pode ser aberto para leitura\n";)
+	exit(0);
+}
+
+pecas [28]
+
+for(i = 0; i<28, i++) {
+	if (fwrite(&pecas[i]), sizeof(struct Peca), 1, fp) != 1) {
+		printf("Erro na eitura do arquivo ARQTESTE");
+		break;
+	}
+}
