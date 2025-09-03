@@ -8,6 +8,7 @@
 #include "DOM-KLRR-CONTROLLER.h"
 #include "DOM-KLRR-VIEW.cpp"
 
+
 //Ebaralha as peças de dominó
 void embaralhar() {
 	srand(time(0));						// Inicializa o gerador de números aleatórios
@@ -333,5 +334,34 @@ void jogarNaMesa() {
 	
 	//mudar a extremidade da mesa
 	
-	
 }
+
+void fopen("SALVAR", "w"){
+	FILE *fp; //define um ponteiro fipo FILE (está em <stdio.h>)
+	if (fp = fopen("ARQTESTE", "w") == NULL) {
+		printf("O arquivo ARQTESTE não pode ser aberto para gravação\n";)
+		exit(0);
+	}
+}
+
+void fwrite("SALVAR", "w"){
+	FILE *fp; //define um ponteiro fipo FILE (está em <stdio.h>)
+	if (fp = fopen("ARQTESTE", "r") == NULL) {
+		printf("O arquivo ARQTESTE não pode ser aberto para leitura\n";)
+		exit(0);
+	}
+}
+
+void fread("SALVAR"){
+	FILE *fp; //define um ponteiro fipo FILE (está em <stdio.h>)
+}
+
+void fclose("SALVAR"){
+	FILE *fp; //define um ponteiro fipo FILE (está em <stdio.h>)
+	for(i = 0; i<28, i++) {
+		if (fwrite(&pecas[i]), sizeof(struct Peca), 1, fp) != 1) {
+			printf("Erro na eitura do arquivo ARQTESTE");
+		}	
+	}
+}
+

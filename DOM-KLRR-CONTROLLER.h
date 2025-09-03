@@ -20,3 +20,7 @@ void prepararJogo();
 int primeiroLance();
 void trocarJogador();
 void jogarNaMesa();
+void fopen();
+void fwrite();
+void fread();
+void fclose();
