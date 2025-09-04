@@ -21,3 +21,4 @@ void prepararJogo();
 int primeiroLance();
 void trocarJogador();
 void jogarNaMesa();
+void passar();

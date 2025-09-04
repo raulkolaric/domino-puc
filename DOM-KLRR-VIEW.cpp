@@ -68,8 +68,8 @@ char menuInicial() {
 		if (op1 >= '0' && op1 <= '6')
 			break;
 			
-		printf("Opcao invalida\n\n");	
-		system("pause");
+		printf("\nOPCAO INVALIDA.");	
+		Sleep(500);
 		fclear();
 	} while (1);
 	
@@ -89,15 +89,15 @@ char menuJogador() {
 		printf("P - Passar\n");
 		printf("S - Sair (interromper o jogo voltando ao menu inicial)\n");
 		printf("Opcao selecionada: ");
-		scanf("%c", &op2);
+		scanf(" %c", &op2);
 		op2 = toupper(op2);
 		
 		if ((op2 == 'J') || (op2 == 'C') || (op2 == 'P') || (op2 == 'S')) {
 			break;
 		}
 		
-		printf("Opcao invalida\n\n");
-		system("pause");
+		printf("\nOPCAO INVALIDA.");
+		Sleep(500);
 		fclear();	
 	} while (1);
 
@@ -117,8 +117,8 @@ void regras() {
 	printf("    Se o monte acabar e nao for possivel jogar, o jogador passa a vez.\n");
 	printf("5 - Final do turno: Assim que o jogador coloca sua peca, a vez passa ao proximo.\n");
 	printf("6 - Fim da partida:\n");
-	printf("    Se alguem colocar sua ultima peça, vence automaticamente (“bater”).\n");
-	printf("    Se o jogo “travar” (ninguem pode jogar e nao ha peças no monte), vence quem tiver menos pecas.\n");
-	printf("    Em caso de empate, vence quem tiver a menor soma dos pontos nas pecas restantes.\n");
+	printf("    Se alguem colocar sua ultima peça, vence automaticamente (bater).\n");
+	printf("    Se o jogo travar (ninguem pode jogar e nao ha peças no monte), vence quem tiver menos pecas.\n");
+	printf("    Em caso de empate, vence quem tiver a menor soma dos pontos nas pecas restantes.\n\n");
 	system("pause");
 }

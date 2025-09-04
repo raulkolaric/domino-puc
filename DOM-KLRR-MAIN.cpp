@@ -1,3 +1,5 @@
+
+
 //DOM-KLRR-MAIN.cpp - Projeto Dominó
 //26/08/25 - Grupo: KLRR
 //Kauã Bezerra Brito

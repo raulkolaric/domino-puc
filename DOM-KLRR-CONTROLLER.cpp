@@ -36,7 +36,7 @@ void jogar() {
 					switch(op2) {
 						case('J'):
 							jogarNaMesa();						
-							system("pause");
+							Sleep(1000);
 							fclear();	
 							trocarJogador();	
 							break;
@@ -63,10 +63,8 @@ void jogar() {
 							break;
 				
 						case('P'):
-							limparTela();
-							trocarJogador();
-							apresentarMesa();
-							iniciarJogo();
+							passar();
+							
 							break;
 				
 						case('S'):
@@ -137,7 +135,7 @@ void prepararJogo() {
 	
 	printf("O jogador %d fez o primeiro lance.\n\n", jogadorAtual);
 	
-	system("pause");
+	Sleep(1000);
 	
 	apresentarMesa();
 	
@@ -221,7 +219,7 @@ void iniciarJogo() {
 		
 		for (int i = 0; i < 28; i++) {
 			if (pecas[i].status == '1') {
-				printf("%d.[%d|%d] ", i, pecas[i].ladoA, pecas[i].ladoB);
+				printf("%d.[%d|%d]  ", i, pecas[i].ladoA, pecas[i].ladoB);
 			}
 		}
 	}
@@ -241,23 +239,30 @@ void iniciarJogo() {
 void jogarNaMesa() {
 	int i, ladoEsquerdo = 0, ladoDireito = 0;
 	char lado;
+	do {
+		printf("Indice da peca selecionada: ");
+		scanf(" %d", &i);
+		
+		if (pecas[i].ladoA == mesaE || pecas[i].ladoB == mesaE) {
+			ladoEsquerdo = 1;
+		}
+		
+		if (pecas[i].ladoA == mesaD || pecas[i].ladoB == mesaD) {
+			ladoDireito = 1;
+		}
+		
+		if (ladoEsquerdo == 0 && ladoDireito == 0) {
+			printf("\nPECA INVALIDA.");
+			Sleep(1000);
+			
+			limparTela();
+			apresentarMesa();
+			iniciarJogo();
+			menuJogador();
+		}
+	} while (ladoEsquerdo == 0 && ladoDireito == 0);
 	
-	printf("Indice da peca selecionada: ");
-	scanf("%d", &i);
-	
-	if (pecas[i].ladoA == mesaE || pecas[i].ladoB == mesaE) {
-		ladoEsquerdo = 1;
-	}
-	
-	if (pecas[i].ladoA == mesaD || pecas[i].ladoB == mesaD) {
-		ladoDireito = 1;
-	}
-	
-	if (ladoEsquerdo == 0 && ladoDireito == 0) {
-		printf("Peca invalida.\n\n");
-	}
-	
-	else if (ladoEsquerdo == 0 && ladoDireito == 1) {
+	if (ladoEsquerdo == 0 && ladoDireito == 1) {
 		if (pecas[i].ladoA == mesaD) {
 			mesa[qtMesa].ladoE = pecas[i].ladoA;
 			mesa[qtMesa].ladoD = pecas[i].ladoB;
@@ -354,14 +359,60 @@ void jogarNaMesa() {
 			qtMesa++;
 		}
 	}
-	
-	//validar os lados da mesa com a peca selecionada
-	
-	//comparar os lados da mesa com a pesa
-	//se possivel os 2, fazer escolha
-	//senao jogar onde e valido
-	
-	//mudar a extremidade da mesa
-	
-	
 }
+
+void passar() {
+	//Passar se ele nao tiver nenhuma peça para jogar e nao tiver mais peca para comprar
+	int j = 0, l = 0;
+	char k;
+	
+	if (jogadorAtual == 1) {
+		k = '1';
+	}
+	
+	else {
+		k = '2';
+	}
+	
+	for (int i = 0; i < 28; i++) { 
+		if (pecas[i].status == k) {
+			if ((pecas[i].ladoA == mesaE || pecas[i].ladoA == mesaD) || (pecas[i].ladoB == mesaE || pecas[i].ladoB == mesaD)) {
+				j = 1;
+			}
+		}		
+	}
+	
+	for (int i = 0; i < 28; i++) {
+		if (pecas[i].status == 0) {
+			l = 1;
+		}
+	}
+	
+	if (j == 0 && l == 0) {
+		limparTela();
+		trocarJogador();
+		apresentarMesa();
+		iniciarJogo();
+	}
+	
+	else if (j == 1){
+		printf("\nHA JOGADAS POSSIVEIS.\n");
+		Sleep(500);
+	}
+	
+	else {
+		printf("\nHA PECAS PARA COMPRAR.\n");
+		Sleep(500);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
