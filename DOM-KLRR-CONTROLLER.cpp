@@ -41,7 +41,7 @@ void salvarJogo() {
 
     fclose(fp);
     printf("\nJogo salvo com sucesso!\n");
-    Sleep(2000);
+    Sleep(1000);
 }
 
 // Carrega um jogo salvo a partir de um arquivo
@@ -109,7 +109,6 @@ void carregarJogo() {
     
             case('P'):
                 passar();
-                
                 break;
     
             case('S'):
@@ -166,7 +165,6 @@ void jogar() {
 				
 						case('P'):
 							passar();
-							
 							break;
 				
 						case('S'):
@@ -180,21 +178,20 @@ void jogar() {
 				break;
 			
 			case('2'): 
-				carregarJogo();
+				
 				break;
 			
 			case('3'): 
-				salvarJogo();
+				carregarJogo();
 				break;
 			
 			case('4'): 
 				limparTela();
 				regras();
-		
 				break;
 		
 			case('5'): 
-			
+				salvarJogo();
 				break;
 		
 			case('6'): 
