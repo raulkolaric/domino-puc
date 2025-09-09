@@ -14,6 +14,7 @@ void gerarPecas();
 int jogadorAtual; 	//Indica o jogador da vez: 1 = Jogador 1, 2 = Jogador 2
 int mesaD, mesaE;	//Extremidades Esquerda e Direita da mesa
 int qtMesa; 		//Quantidade de pecas na mesa
+int Jogar = 1;
 
 //Estruturas de dados principais
 struct Mesa

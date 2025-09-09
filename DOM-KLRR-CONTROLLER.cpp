@@ -34,11 +34,15 @@ void jogar() {
 					menuJogador();
 				
 					switch(op2) {
-						case('J'):
+						case('J'): 
 							jogarNaMesa();						
-							Sleep(1000);
-							fclear();	
-							trocarJogador();	
+							Sleep(500);
+							fclear();
+							
+							if (Jogar == 1) {
+								trocarJogador();
+							}
+								
 							break;
 					
 						case('C'):	
@@ -241,28 +245,24 @@ void iniciarJogo() {
 void jogarNaMesa() {
 	int i, ladoEsquerdo = 0, ladoDireito = 0;
 	char lado;
-	do {
-		printf("Indice da peca selecionada: ");
-		scanf(" %d", &i);
+	
+	printf("Indice da peca selecionada: ");
+	scanf(" %d", &i);
+	
+	if (pecas[i].ladoA == mesaE || pecas[i].ladoB == mesaE) {
+		ladoEsquerdo = 1;
+	}
 		
-		if (pecas[i].ladoA == mesaE || pecas[i].ladoB == mesaE) {
-			ladoEsquerdo = 1;
-		}
+	if (pecas[i].ladoA == mesaD || pecas[i].ladoB == mesaD) {
+		ladoDireito = 1;
+	}
 		
-		if (pecas[i].ladoA == mesaD || pecas[i].ladoB == mesaD) {
-			ladoDireito = 1;
-		}
-		
-		if (ladoEsquerdo == 0 && ladoDireito == 0) {
-			printf("\n--------------PECA INVALIDA--------------");
-			Sleep(1000);
-		
-			limparTela();
-			apresentarMesa();
-			iniciarJogo();
-			menuJogador();
-		}
-	} while (ladoEsquerdo == 0 && ladoDireito == 0);
+	if (ladoEsquerdo == 0 && ladoDireito == 0) {
+		printf("\n--------------PECA INVALIDA--------------");
+		Jogar = 0;
+		Sleep(500);
+	}
+
 	
 	if (ladoEsquerdo == 0 && ladoDireito == 1) {
 		if (pecas[i].ladoA == mesaD) {
@@ -310,11 +310,9 @@ void jogarNaMesa() {
 	}
 	
 	else if (ladoEsquerdo == 1 && ladoDireito == 1) {
-		do {
-			printf("Qual lado? (D - Direito, E - Esquerdo): ");
-			scanf(" %c", &lado);
-			lado = toupper(lado);
-		} while(lado != 'D' && lado != 'E');
+		printf("Qual lado? (D - Direito, E - Esquerdo): ");
+		scanf(" %c", &lado);
+		lado = toupper(lado);
 	
 		if (lado == 'D') {
 			if (pecas[i].ladoA == mesaD) {
@@ -359,6 +357,12 @@ void jogarNaMesa() {
 			mesa[qtMesa].status = 'J';
 			pecas[i].status = 'M';
 			qtMesa++;
+		}
+		
+		else {
+			printf("\n--------------LADO INVALIDO--------------");
+			Jogar = 0;
+			Sleep(500);
 		}
 	}
 }

@@ -99,7 +99,7 @@ char menuJogador() {
 			break;
 		}
 		
-		printf("\nOPCAO INVALIDA.");
+		printf("\n--------------OPCAO INVALIDA--------------");
 		Sleep(500);
 		fclear();	
 	} while (1);
