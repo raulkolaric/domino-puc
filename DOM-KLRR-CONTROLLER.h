@@ -27,6 +27,7 @@ void jogarNaMesa();
 void passar();
 void salvarJogo();
 void carregarJogo();
+void ganhador();
 
 #endif // DOM_KLRR_CONTROLLER_H
 

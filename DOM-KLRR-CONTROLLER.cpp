@@ -40,7 +40,7 @@ void salvarJogo() {
     if (fwrite(&mesaD, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao da extremidade direita.\n"); fclose(fp); return; }
 
     fclose(fp);
-    printf("\nJogo salvo com sucesso!\n");
+    printf("\n----------JOGO SALVO COM SUCESSO!----------\n");
     Sleep(1000);
 }
 
@@ -49,7 +49,7 @@ void carregarJogo() {
     FILE *fp;
 
     if ((fp = fopen("domino.dat", "r")) == NULL) {
-        printf("\nNenhum jogo salvo encontrado.\n");
+    	printf("\n-------NENHUM JOGO SALVO ENCONTRADO!-------\n");
         Sleep(2000);
         return;
     }
@@ -63,8 +63,8 @@ void carregarJogo() {
     if (fread(&mesaD, sizeof(int), 1, fp) != 1) { printf("Erro na leitura da extremidade direita.\n"); fclose(fp); return; }
 
     fclose(fp);
-    printf("\nJogo carregado com sucesso!\n");
-    Sleep(2000);
+    printf("\n-------JOGO CARREGADO COM SUCESSO!-------\n");
+    Sleep(1000);
     
     // Apresenta o jogo carregado e entra no loop principal
     limparTela();
@@ -132,6 +132,7 @@ void jogar() {
 				
 					switch(op2) {
 						case('J'): 
+							ganhador();
 							jogarNaMesa();						
 							Sleep(500);
 							fclear();
@@ -355,7 +356,7 @@ void jogarNaMesa() {
 	}
 		
 	if (ladoEsquerdo == 0 && ladoDireito == 0) {
-		printf("\n--------------PECA INVALIDA--------------");
+		printf("\n--------------PECA INVALIDA!--------------");
 		Jogar = 0;
 		Sleep(500);
 	}
@@ -457,7 +458,7 @@ void jogarNaMesa() {
 		}
 		
 		else {
-			printf("\n--------------LADO INVALIDO--------------");
+			printf("\n--------------LADO INVALIDO!--------------");
 			Jogar = 0;
 			Sleep(500);
 		}
@@ -499,13 +500,38 @@ void passar() {
 	}
 	
 	else if (j == 1){
-		printf("\n--------------HA JOGADAS POSSIVEIS--------------\n");
+		printf("\n--------------HA JOGADAS POSSIVEIS!--------------\n");
 		Sleep(500);
 	}
 	
 	else {
-		printf("\n--------------HA PECAS PARA COMPRAR--------------\n");
+		printf("\n--------------HA PECAS PARA COMPRAR!--------------\n");
 		Sleep(500);
 	}
+}
+
+void ganhador() {
+	int pecasJ1 = 0;
+	int pecasJ2 = 0;
+	
+	for (int i = 0; i < 28; i++) {
+		if (pecas[i].status == '1') {
+			pecasJ1++;
+		}
+		
+		else if (pecas[i].status == '2') {
+			pecasJ2++;
+		}
+	}
+	
+	if (pecasJ1 == 0) {
+		limparTela();
+		printf("\n---------O JOGADOR 1 VENCEU O JOGO---------\n");
+	}
+	
+	else if (pecasJ2 == 0) {
+		limparTela();
+		printf("\n---------O JOGADOR 2 VENCEU O JOGO---------\n");
+	}	
 }
 
