@@ -77,10 +77,14 @@ void carregarJogo() {
         switch(op2) {
             case('J'):
                 jogarNaMesa();						
-                Sleep(1000);
-                fclear();	
-                trocarJogador();	
-                break;
+				Sleep(500);
+				fclear();
+							
+				if (Jogar == 1) {
+					trocarJogador();
+				}
+								
+				break;
         
             case('C'):	
                 for (int i = 14; i < 28; i++) {
@@ -345,10 +349,12 @@ void jogarNaMesa() {
 	
 	if (pecas[i].ladoA == mesaE || pecas[i].ladoB == mesaE) {
 		ladoEsquerdo = 1;
+		Jogar = 1;
 	}
 		
 	if (pecas[i].ladoA == mesaD || pecas[i].ladoB == mesaD) {
 		ladoDireito = 1;
+		Jogar = 1;
 	}
 		
 	if (ladoEsquerdo == 0 && ladoDireito == 0) {
