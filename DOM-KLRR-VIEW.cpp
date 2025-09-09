@@ -27,8 +27,8 @@ void ApresentarPecas() {
 void apresentarMesa() {
    //Calcula o tamanho do array 'mesa'
     int tamanho = sizeof(mesa) / sizeof(mesa[0]);
-    printf("                                        MESA                                          \n");
-	printf("======================================================================================\n");
+    printf("\n                                                     MESA                                          \n");
+	printf("=======================================================================================================================\n");
 	
     //Imprime todas as peças do array
     for (int i = 0; i < tamanho; i++) {
@@ -36,7 +36,7 @@ void apresentarMesa() {
 			printf("[%d|%d] ", mesa[i].ladoE, mesa[i].ladoD);	
 		}
     }
-	printf("\n======================================================================================\n");
+	printf("\n=======================================================================================================================\n");
 }	
 
 //Limpa o buffer de entrada
@@ -55,20 +55,21 @@ char menuInicial() {
 	do {
 		limparTela();
 		printf("\n-------------------MENU-------------------\n");
-		printf("1 - Iniciar jogo (2 jogadores)\n");
-		printf("2 - Iniciar jogo (contra o computador)\n");
-		printf("3 - Retornar ao jogo interrompido\n");
-		printf("4 - Regras gerais do Jogo\n");
-		printf("5 - Salvar o jogo\n");
-		printf("6 - Recuperar o jogo salvo\n");
-		printf("0 - Sair do programa\n");
+		printf("| 1 - Iniciar jogo (2 jogadores)         |\n");
+		printf("| 2 - Iniciar jogo (contra o computador) |\n");
+		printf("| 3 - Retornar ao jogo interrompido      |\n");
+		printf("| 4 - Regras gerais do Jogo              |\n");
+		printf("| 5 - Salvar o jogo                      |\n");
+		printf("| 6 - Recuperar o jogo salvo             |\n");
+		printf("| 0 - Sair do programa                   |\n");
+		printf("------------------------------------------\n");
 		printf("Opcao selecionada: ");
 		scanf("%c", &op1);	
 		
 		if (op1 >= '0' && op1 <= '6')
 			break;
 			
-		printf("\nOPCAO INVALIDA.");	
+		printf("\n--------------OPCAO INVALIDA--------------");	
 		Sleep(500);
 		fclear();
 	} while (1);
@@ -84,10 +85,12 @@ char menuJogador() {
 		apresentarMesa();
 		iniciarJogo();
 		
-		printf("\nJ - Jogar (possiveis %d ou %d)\n", mesaE, mesaD);
-		printf("C - Comprar\n");
-		printf("P - Passar\n");
-		printf("S - Sair (interromper o jogo voltando ao menu inicial)\n");
+		printf("\n----------------------------------------------------------\n");
+		printf("| J - Jogar (possiveis %d ou %d)                           |\n", mesaE, mesaD);
+		printf("| C - Comprar                                            |\n");
+		printf("| P - Passar                                             |\n");
+		printf("| S - Sair (interromper o jogo voltando ao menu inicial) |\n");
+		printf("----------------------------------------------------------\n");
 		printf("Opcao selecionada: ");
 		scanf(" %c", &op2);
 		op2 = toupper(op2);

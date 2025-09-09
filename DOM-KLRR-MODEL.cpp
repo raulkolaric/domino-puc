@@ -15,7 +15,7 @@ void gerarPecas() {
 		for(int j = i; j < 7; j++) {
 			pecas[p].ladoA = i;
 			pecas[p].ladoB = j;
-			pecas[p].status = 'B';
+			pecas[p].status = 0;
 			p++;
 		}
 	}	
