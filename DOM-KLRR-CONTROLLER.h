@@ -5,6 +5,9 @@
 //Raul Kolaric
 //Rodrigo Ward Leite
 
+#ifndef DOM_KLRR_CONTROLLER_H
+#define DOM_KLRR_CONTROLLER_H
+
 //Bibliotecas padrão
 #include <ctype.h>
 #include <iostream>
@@ -22,3 +25,9 @@ int primeiroLance();
 void trocarJogador();
 void jogarNaMesa();
 void passar();
+void salvarJogo();
+void carregarJogo();
+
+#endif // DOM_KLRR_CONTROLLER_H
+
+

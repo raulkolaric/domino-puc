@@ -21,6 +21,100 @@ void embaralhar() {
 	}
 }
 
+// Salva o estado atual do jogo em um arquivo
+void salvarJogo() {
+    FILE *fp;
+
+    if ((fp = fopen("domino.dat", "w")) == NULL) {
+        printf("\nErro: O arquivo nao pode ser aberto para gravacao.\n");
+        Sleep(2000);
+        return;
+    }
+
+    // Grava o estado completo do jogo (structs e variaveis de controle)
+    if (fwrite(&pecas, sizeof(pecas), 1, fp) != 1) { printf("Erro na gravacao do estado das pecas.\n"); fclose(fp); return; }
+    if (fwrite(&mesa, sizeof(mesa), 1, fp) != 1) { printf("Erro na gravacao do estado da mesa.\n"); fclose(fp); return; }
+    if (fwrite(&jogadorAtual, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao do jogador atual.\n"); fclose(fp); return; }
+    if (fwrite(&qtMesa, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao da quantidade de pecas na mesa.\n"); fclose(fp); return; }
+    if (fwrite(&mesaE, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao da extremidade esquerda.\n"); fclose(fp); return; }
+    if (fwrite(&mesaD, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao da extremidade direita.\n"); fclose(fp); return; }
+
+    fclose(fp);
+    printf("\nJogo salvo com sucesso!\n");
+    Sleep(2000);
+}
+
+// Carrega um jogo salvo a partir de um arquivo
+void carregarJogo() {
+    FILE *fp;
+
+    if ((fp = fopen("domino.dat", "r")) == NULL) {
+        printf("\nNenhum jogo salvo encontrado.\n");
+        Sleep(2000);
+        return;
+    }
+
+    // Le o estado completo do jogo
+    if (fread(&pecas, sizeof(pecas), 1, fp) != 1) { printf("Erro na leitura do estado das pecas.\n"); fclose(fp); return; }
+    if (fread(&mesa, sizeof(mesa), 1, fp) != 1) { printf("Erro na leitura do estado da mesa.\n"); fclose(fp); return; }
+    if (fread(&jogadorAtual, sizeof(int), 1, fp) != 1) { printf("Erro na leitura do jogador atual.\n"); fclose(fp); return; }
+    if (fread(&qtMesa, sizeof(int), 1, fp) != 1) { printf("Erro na leitura da quantidade de pecas na mesa.\n"); fclose(fp); return; }
+    if (fread(&mesaE, sizeof(int), 1, fp) != 1) { printf("Erro na leitura da extremidade esquerda.\n"); fclose(fp); return; }
+    if (fread(&mesaD, sizeof(int), 1, fp) != 1) { printf("Erro na leitura da extremidade direita.\n"); fclose(fp); return; }
+
+    fclose(fp);
+    printf("\nJogo carregado com sucesso!\n");
+    Sleep(2000);
+    
+    // Apresenta o jogo carregado e entra no loop principal
+    limparTela();
+    apresentarMesa();
+    iniciarJogo();
+    
+    do {
+        menuJogador();
+    
+        switch(op2) {
+            case('J'):
+                jogarNaMesa();						
+                Sleep(1000);
+                fclear();	
+                trocarJogador();	
+                break;
+        
+            case('C'):	
+                for (int i = 14; i < 28; i++) {
+                    if (pecas[i].status == 0) {
+                        if (jogadorAtual == 1) {
+                            pecas[i].status = '1';
+                        }
+                        
+                        else {
+                            pecas[i].status = '2';
+                        }
+                        
+                        break;
+                    }
+                }
+                
+                limparTela();
+                apresentarMesa();
+                iniciarJogo();
+            
+                break;
+    
+            case('P'):
+                passar();
+                
+                break;
+    
+            case('S'):
+                limparTela();
+                break;
+        }
+    } while (op2 != 'S');
+}
+
 //Função principal de controle das jogadas e menus
 void jogar() {
 	do {
@@ -78,11 +172,11 @@ void jogar() {
 				break;
 			
 			case('2'): 
-			
+				carregarJogo();
 				break;
 			
 			case('3'): 
-			
+				salvarJogo();
 				break;
 			
 			case('4'): 
@@ -96,7 +190,7 @@ void jogar() {
 				break;
 		
 			case('6'): 
-	
+				carregarJogo();
 				break;
 		
 			case('0'):
@@ -405,14 +499,4 @@ void passar() {
 		Sleep(500);
 	}
 }
-
-
-
-
-
-
-
-
-
-
 
