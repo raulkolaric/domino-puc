@@ -227,7 +227,9 @@ void prepararJogo() {
 	
 	limparTela();
 	
-	printf("O jogador %d fez o primeiro lance.\n\n", jogadorAtual);
+	printf("\n------------------------------------\n");
+	printf("|O jogador %d fez o primeiro lance. |\n", jogadorAtual);
+	printf("------------------------------------\n");
 	
 	Sleep(1000);
 	
@@ -346,9 +348,9 @@ void jogarNaMesa() {
 		}
 		
 		if (ladoEsquerdo == 0 && ladoDireito == 0) {
-			printf("\nPECA INVALIDA.");
+			printf("\n--------------PECA INVALIDA--------------");
 			Sleep(1000);
-			
+		
 			limparTela();
 			apresentarMesa();
 			iniciarJogo();
@@ -490,12 +492,12 @@ void passar() {
 	}
 	
 	else if (j == 1){
-		printf("\nHA JOGADAS POSSIVEIS.\n");
+		printf("\n--------------HA JOGADAS POSSIVEIS--------------\n");
 		Sleep(500);
 	}
 	
 	else {
-		printf("\nHA PECAS PARA COMPRAR.\n");
+		printf("\n--------------HA PECAS PARA COMPRAR--------------\n");
 		Sleep(500);
 	}
 }
