@@ -87,8 +87,6 @@ void carregarJogo() {
 				break;
         
             case('C'):	
-            	ganhador();
-            
                 for (int i = 14; i < 28; i++) {
                     if (pecas[i].status == 0) {
                         if (jogadorAtual == 1) {
@@ -102,6 +100,8 @@ void carregarJogo() {
                         break;
                     }
                 }
+                
+                ganhador();
                 
                 limparTela();
                 apresentarMesa();
@@ -145,8 +145,6 @@ void jogar() {
 							break;
 					
 						case('C'):	
-							ganhador();
-								
 							for (int i = 14; i < 28; i++) {
 								if (pecas[i].status == 0) {
 									if (jogadorAtual == 1) {
@@ -160,6 +158,8 @@ void jogar() {
 									break;
 								}
 							}
+							
+							ganhador();
 							
 							limparTela();
 							apresentarMesa();
