@@ -1,5 +1,5 @@
 //DOM-KLRR-MODEL.cpp - Projeto Dominó
-//26/08/25 - Grupo: KLRR
+//09/09/2025 - Grupo: KLRR
 //Kauã Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric

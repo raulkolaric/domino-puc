@@ -1,5 +1,5 @@
 //DOM-KLRR-CONTROLLER.h - Projeto Dominó
-//26/08/25 - Grupo: KLRR
+//09/09/2025 - Grupo: KLRR
 //Kauã Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
@@ -17,17 +17,17 @@
 #include <windows.h>
 
 //Declaração das funções utilizadas no jogo
+void carregarJogo();
 void embaralhar();
+void ganhador();
 void iniciarJogo();
 void jogar();
-void prepararJogo();
-int primeiroLance();
-void trocarJogador();
 void jogarNaMesa();
 void passar();
+void prepararJogo();
+int primeiroLance();
 void salvarJogo();
-void carregarJogo();
-void ganhador();
+void trocarJogador();
 
 #endif // DOM_KLRR_CONTROLLER_H
 

@@ -1,5 +1,5 @@
 //DOM-KLRR-VIEW.cpp - Projeto Dominó
-//26/08/25 - Grupo: KLRR
+//09/09/2025 - Grupo: KLRR
 //Kauã Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
@@ -111,11 +111,11 @@ char menuJogador() {
 //Exibe as regras resumidas do dominó
 void regras() {
 	printf("\n-------------------------------------------------Regras-resumidas-do-Domino-------------------------------------------------\n");
-	printf("1 - Distribuicao inicial: Cada jogador comeca com 7 pecas. As demais ficam no “monte” para compra.\n");
+	printf("1 - Distribuicao inicial: Cada jogador comeca com 7 pecas. As demais ficam no monte para compra.\n");
 	printf("2 - Inicio do jogo: Comeca quem tiver o [6|6]. Se ninguem tiver, vale a peca de numero duplo mais alto (ex: [5|5], [4|4]...).\n");
 	printf("3 - Sentido do jogo: O jogo segue em sentido anti-horario.\n");
 	printf("4 - Como jogar:\n");
-	printf("    O jogador deve colocar uma peca que combine com uma das extremidades abertas da mesa.\n");
+	printf("    O jogador deve colocar uma peca que combine com uma das extremidades da mesa.\n");
 	printf("    Se nao tiver peca compativel, deve comprar do monte ate conseguir jogar.\n");
 	printf("    Se o monte acabar e nao for possivel jogar, o jogador passa a vez.\n");
 	printf("5 - Final do turno: Assim que o jogador coloca sua peca, a vez passa ao proximo.\n");

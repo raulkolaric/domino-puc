@@ -1,5 +1,5 @@
 //DOM-KLRR-CONTROLLER.cpp - Projeto Dominó
-//26/08/25 - Grupo: KLRR
+//09/09/2025 - Grupo: KLRR
 //Kauã Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
@@ -8,9 +8,9 @@
 #include "DOM-KLRR-CONTROLLER.h"
 #include "DOM-KLRR-VIEW.cpp"
 
-//Ebaralha as peças de dominó
+//Embaralha as peças de dominó
 void embaralhar() {
-	srand(time(0));						// Inicializa o gerador de números aleatórios
+	srand(time(0));						//Inicializa o gerador de números aleatórios
 	int n = 28;			
 	struct Peca temp;
 	for(int i = n - 1; i > 0; i--) {
@@ -21,17 +21,17 @@ void embaralhar() {
 	}
 }
 
-// Salva o estado atual do jogo em um arquivo
+//Salva o estado atual do jogo em um arquivo
 void salvarJogo() {
     FILE *fp;
 
     if ((fp = fopen("domino.dat", "w")) == NULL) {
         printf("\nErro: O arquivo nao pode ser aberto para gravacao.\n");
-        Sleep(2000);
+        Sleep(1000);
         return;
     }
 
-    // Grava o estado completo do jogo (structs e variaveis de controle)
+    //Grava o estado completo do jogo (structs e variaveis de controle)
     if (fwrite(&pecas, sizeof(pecas), 1, fp) != 1) { printf("Erro na gravacao do estado das pecas.\n"); fclose(fp); return; }
     if (fwrite(&mesa, sizeof(mesa), 1, fp) != 1) { printf("Erro na gravacao do estado da mesa.\n"); fclose(fp); return; }
     if (fwrite(&jogadorAtual, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao do jogador atual.\n"); fclose(fp); return; }
@@ -44,17 +44,17 @@ void salvarJogo() {
     Sleep(1000);
 }
 
-// Carrega um jogo salvo a partir de um arquivo
+//Carrega um jogo salvo a partir de um arquivo
 void carregarJogo() {
     FILE *fp;
 
     if ((fp = fopen("domino.dat", "r")) == NULL) {
     	printf("\n-------NENHUM JOGO SALVO ENCONTRADO!-------\n");
-        Sleep(2000);
+        Sleep(1000);
         return;
     }
 
-    // Le o estado completo do jogo
+    //Le o estado completo do jogo
     if (fread(&pecas, sizeof(pecas), 1, fp) != 1) { printf("Erro na leitura do estado das pecas.\n"); fclose(fp); return; }
     if (fread(&mesa, sizeof(mesa), 1, fp) != 1) { printf("Erro na leitura do estado da mesa.\n"); fclose(fp); return; }
     if (fread(&jogadorAtual, sizeof(int), 1, fp) != 1) { printf("Erro na leitura do jogador atual.\n"); fclose(fp); return; }
@@ -66,7 +66,7 @@ void carregarJogo() {
     printf("\n-------JOGO CARREGADO COM SUCESSO!-------\n");
     Sleep(1000);
     
-    // Apresenta o jogo carregado e entra no loop principal
+    //Apresenta o jogo carregado e entra no loop principal
     limparTela();
     apresentarMesa();
     iniciarJogo();
@@ -87,6 +87,8 @@ void carregarJogo() {
 				break;
         
             case('C'):	
+            	ganhador();
+            
                 for (int i = 14; i < 28; i++) {
                     if (pecas[i].status == 0) {
                         if (jogadorAtual == 1) {
@@ -343,27 +345,32 @@ void jogarNaMesa() {
 	int i, ladoEsquerdo = 0, ladoDireito = 0;
 	char lado;
 	
+	//Solicita o índice da peça que o jogador deseja jogar
 	printf("Indice da peca selecionada: ");
 	scanf(" %d", &i);
 	
+	//Verifica se a peça pode ser jogada no lado esquerdo da mesa
 	if (pecas[i].ladoA == mesaE || pecas[i].ladoB == mesaE) {
 		ladoEsquerdo = 1;
 		Jogar = 1;
 	}
 		
+	//Verifica se a peça pode ser jogada no lado direito da mesa
 	if (pecas[i].ladoA == mesaD || pecas[i].ladoB == mesaD) {
 		ladoDireito = 1;
 		Jogar = 1;
 	}
-		
+	
+	//Se a peça não encaixa em nenhum lado, é inválida	
 	if (ladoEsquerdo == 0 && ladoDireito == 0) {
 		printf("\n--------------PECA INVALIDA!--------------");
 		Jogar = 0;
 		Sleep(500);
 	}
 
-	
+	//Peça só pode ser jogada no lado direito
 	if (ladoEsquerdo == 0 && ladoDireito == 1) {
+		//Ajusta a peça para o lado certo
 		if (pecas[i].ladoA == mesaD) {
 			mesa[qtMesa].ladoE = pecas[i].ladoA;
 			mesa[qtMesa].ladoD = pecas[i].ladoB;
@@ -381,7 +388,9 @@ void jogarNaMesa() {
 		qtMesa++;
 	}
 	
+	//Peça só pode ser jogada no lado esquerdo
 	else if (ladoEsquerdo == 1 && ladoDireito == 0) {
+		//Move todas as peças para a direita para abrir espaço na esquerda
 		for (int j = qtMesa; j > 0; j--) {
 			mesa[j].ladoD = mesa[j - 1].ladoD;
 			mesa[j].ladoE = mesa[j - 1].ladoE;
@@ -391,6 +400,7 @@ void jogarNaMesa() {
 			}
 		}
 		
+		//Posiciona a nova peça na posição 0 (início da mesa)
 		if (pecas[i].ladoA == mesaE) {
 			mesa[0].ladoE = pecas[i].ladoB;
 			mesa[0].ladoD = pecas[i].ladoA;
@@ -408,11 +418,13 @@ void jogarNaMesa() {
 		qtMesa++;
 	}
 	
+	//Peça pode ser jogada dos dois lados — jogador escolhe
 	else if (ladoEsquerdo == 1 && ladoDireito == 1) {
 		printf("Qual lado? (D - Direito, E - Esquerdo): ");
 		scanf(" %c", &lado);
 		lado = toupper(lado);
 	
+		//Jogar à direita
 		if (lado == 'D') {
 			if (pecas[i].ladoA == mesaD) {
 				mesa[qtMesa].ladoE = pecas[i].ladoA;
@@ -431,6 +443,7 @@ void jogarNaMesa() {
 			qtMesa++;
 		}
 		
+		//Jogar à esquerda
 		else if (lado == 'E'){
 			for (int j = qtMesa; j > 0; j--) {
 				mesa[j].ladoD = mesa[j - 1].ladoD;
@@ -465,16 +478,19 @@ void jogarNaMesa() {
 		}
 	}
 	
+	//Verifica se há ganhador após a jogada
 	ganhador();
 }
 
 void passar() {
-	//Passar se ele nao tiver nenhuma peça para jogar e nao tiver mais peca para comprar
+	//Verifica se o jogo foi ganho antes de passar
 	ganhador();
 	
+	//Passar se ele nao tiver nenhuma peça para jogar e nao tiver mais peca para comprar
 	int j = 0, l = 0;
 	char k;
 	
+	//Define o jogador atual como '1' ou '2'
 	if (jogadorAtual == 1) {
 		k = '1';
 	}
@@ -483,6 +499,7 @@ void passar() {
 		k = '2';
 	}
 	
+	//Verifica se o jogador atual possui jogadas possíveis
 	for (int i = 0; i < 28; i++) { 
 		if (pecas[i].status == k) {
 			if ((pecas[i].ladoA == mesaE || pecas[i].ladoA == mesaD) || (pecas[i].ladoB == mesaE || pecas[i].ladoB == mesaD)) {
@@ -491,12 +508,14 @@ void passar() {
 		}		
 	}
 	
+	//Verifica se ainda existem peças no monte para comprar
 	for (int i = 0; i < 28; i++) {
 		if (pecas[i].status == 0) {
 			l = 1;
 		}
 	}
 	
+	//Se não há jogadas nem peças para comprar: passa o turno
 	if (j == 0 && l == 0) {
 		limparTela();
 		trocarJogador();
@@ -521,6 +540,7 @@ void ganhador() {
 	int j = 0, l = 0;
 	int j1 = 0, j2 = 0;
 	
+	//Conta peças ainda na mão dos jogadores
 	for (int i = 0; i < 28; i++) {
 		if (pecas[i].status == '1') {
 			pecasJ1 = pecasJ1 + 1;
@@ -531,6 +551,7 @@ void ganhador() {
 		}
 	}
 	
+	//Verifica se ainda existem jogadas possíveis na mesa
 	for (int i = 0; i < 28; i++) { 
 		if (pecas[i].status == '1' || pecas[i].status == '2') {
 			if ((pecas[i].ladoA == mesaE || pecas[i].ladoA == mesaD) || (pecas[i].ladoB == mesaE || pecas[i].ladoB == mesaD)) {
@@ -539,12 +560,14 @@ void ganhador() {
 		}		
 	}
 	
+	//Verifica se ainda existem peças para comprar
 	for (int i = 0; i < 28; i++) {
 		if (pecas[i].status == 0) {
 			l = 1;
 		}
 	}
 	
+	//Se algum jogador ficou sem peças, vence
 	if (pecasJ1 == 0) {
 		limparTela();
 		printf("\n---------O JOGADOR 1 VENCEU O JOGO---------\n");
@@ -559,6 +582,7 @@ void ganhador() {
 		op2 = 'S';
 	}	
 	
+	//Se nao for possivel mais jogar ou comprar pecas, vence aquele que tiver menos pecas
 	else if (j == 0 && l == 0) {
 		if (pecasJ2 > pecasJ1) {
 			limparTela();
@@ -575,6 +599,7 @@ void ganhador() {
 		}
 		
 		else {
+			//Caso o número de peças restantes seja igual, soma os valores das peças
 			for (int i = 0; i < 28; i++) {
 				if (pecas[i].status == '1') {
 					j1 = j1 + pecas[i].ladoA + pecas[i].ladoB;
@@ -585,6 +610,7 @@ void ganhador() {
 				}
 			}
 			
+			//Compara a soma dos valores das peças para decidir o vencedor
 			if (j2 > j1) {
 				limparTela();
 				printf("\n---------O JOGADOR 1 VENCEU O JOGO---------\n");
