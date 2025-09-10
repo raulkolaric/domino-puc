@@ -1,5 +1,5 @@
 //DOM-KLRR-CONTROLLER.cpp - Projeto Dominó
-//09/09/2025 - Grupo: KLRR
+//**/**/2025 - Grupo: KLRR
 //Kauã Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
@@ -7,42 +7,6 @@
 
 #include "DOM-KLRR-CONTROLLER.h"
 #include "DOM-KLRR-VIEW.cpp"
-
-//Embaralha as peças de dominó
-void embaralhar() {
-	srand(time(0));						//Inicializa o gerador de números aleatórios
-	int n = 28;			
-	struct Peca temp;
-	for(int i = n - 1; i > 0; i--) {
-		int j = rand()%(n);
-		temp = pecas[i];
-		pecas[i] = pecas[j];
-		pecas[j] = temp;
-	}
-}
-
-//Salva o estado atual do jogo em um arquivo
-void salvarJogo() {
-    FILE *fp;
-
-    if ((fp = fopen("domino.dat", "w")) == NULL) {
-        printf("\nErro: O arquivo nao pode ser aberto para gravacao.\n");
-        Sleep(1000);
-        return;
-    }
-
-    //Grava o estado completo do jogo (structs e variaveis de controle)
-    if (fwrite(&pecas, sizeof(pecas), 1, fp) != 1) { printf("Erro na gravacao do estado das pecas.\n"); fclose(fp); return; }
-    if (fwrite(&mesa, sizeof(mesa), 1, fp) != 1) { printf("Erro na gravacao do estado da mesa.\n"); fclose(fp); return; }
-    if (fwrite(&jogadorAtual, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao do jogador atual.\n"); fclose(fp); return; }
-    if (fwrite(&qtMesa, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao da quantidade de pecas na mesa.\n"); fclose(fp); return; }
-    if (fwrite(&mesaE, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao da extremidade esquerda.\n"); fclose(fp); return; }
-    if (fwrite(&mesaD, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao da extremidade direita.\n"); fclose(fp); return; }
-
-    fclose(fp);
-    printf("\n----------JOGO SALVO COM SUCESSO!----------\n");
-    Sleep(1000);
-}
 
 //Carrega um jogo salvo a partir de um arquivo
 void carregarJogo() {
@@ -76,41 +40,15 @@ void carregarJogo() {
     
         switch(op2) {
             case('J'):
-                jogarNaMesa();						
-				Sleep(500);
-				fclear();
-							
-				if (Jogar == 1) {
-					trocarJogador();
-				}
-								
+                fJ();				
 				break;
         
             case('C'):	
-                for (int i = 14; i < 28; i++) {
-                    if (pecas[i].status == 0) {
-                        if (jogadorAtual == 1) {
-                            pecas[i].status = '1';
-                        }
-                        
-                        else {
-                            pecas[i].status = '2';
-                        }
-                        
-                        break;
-                    }
-                }
-                
-                ganhador();
-                
-                limparTela();
-                apresentarMesa();
-                iniciarJogo();
-            
-                break;
+                fC();
+            	break;
     
             case('P'):
-                passar();
+                fP();
                 break;
     
             case('S'):
@@ -118,6 +56,19 @@ void carregarJogo() {
                 break;
         }
     } while (op2 != 'S');
+}
+
+//Embaralha as peças de dominó
+void embaralhar() {
+	srand(time(0));						//Inicializa o gerador de números aleatórios
+	int n = 28;			
+	struct Peca temp;
+	for(int i = n - 1; i > 0; i--) {
+		int j = rand()%(n);
+		temp = pecas[i];
+		pecas[i] = pecas[j];
+		pecas[j] = temp;
+	}
 }
 
 //Função principal de controle das jogadas e menus
@@ -134,41 +85,15 @@ void jogar() {
 				
 					switch(op2) {
 						case('J'): 
-							jogarNaMesa();						
-							Sleep(500);
-							fclear();
-							
-							if (Jogar == 1) {
-								trocarJogador();
-							}
-								
+    						fJ();
 							break;
 					
 						case('C'):	
-							for (int i = 14; i < 28; i++) {
-								if (pecas[i].status == 0) {
-									if (jogadorAtual == 1) {
-										pecas[i].status = '1';
-									}
-									
-									else {
-										pecas[i].status = '2';
-									}
-									
-									break;
-								}
-							}
-							
-							ganhador();
-							
-							limparTela();
-							apresentarMesa();
-							iniciarJogo();
-						
+							fC();
 							break;
 				
 						case('P'):
-							passar();
+							fP();
 							break;
 				
 						case('S'):
@@ -182,7 +107,33 @@ void jogar() {
 				break;
 			
 			case('2'): 
-				
+				prepararJogo();
+					
+					do {
+						menuJogador();
+					
+						switch(op2) {
+							case('J'): 
+								fJ();	
+								break;
+						
+							case('C'):	
+								fC();
+								break;
+					
+							case('P'):
+								fP();
+								cJogar();
+								break;
+					
+							case('S'):
+								limparTela();
+								break;
+						}
+				} while (op2 != 'S');
+					
+				limparTela();
+							
 				break;
 			
 			case('3'): 
@@ -196,41 +147,15 @@ void jogar() {
 				
 					switch(op2) {
 						case('J'): 
-							jogarNaMesa();						
-							Sleep(500);
-							fclear();
-							
-							if (Jogar == 1) {
-								trocarJogador();
-							}
-								
+							fJ();
 							break;
 					
 						case('C'):	
-							for (int i = 14; i < 28; i++) {
-								if (pecas[i].status == 0) {
-									if (jogadorAtual == 1) {
-										pecas[i].status = '1';
-									}
-									
-									else {
-										pecas[i].status = '2';
-									}
-									
-									break;
-								}
-							}
-							
-							ganhador();
-							
-							limparTela();
-							apresentarMesa();
-							iniciarJogo();
-						
+							fC();
 							break;
 				
 						case('P'):
-							passar();
+							fP();
 							break;
 				
 						case('S'):
@@ -262,6 +187,38 @@ void jogar() {
 		
 		limparTela();
 	} while (op1 != '0');
+}
+
+void fJ() {
+	jogarNaMesa();						
+	Sleep(500);
+	fclear();
+	
+	if (Jogar == 1) {
+		trocarJogador();
+	}							
+}
+
+void fC() {
+	for (int i = 14; i < 28; i++) {
+		if (pecas[i].status == 0) {
+			if (jogadorAtual == 1) {
+				pecas[i].status = '1';
+			}
+			
+			else {
+				pecas[i].status = '2';
+			}
+			
+			break;
+		}
+	}
+	
+	ganhador();
+	
+	limparTela();
+	apresentarMesa();
+	iniciarJogo();
 }
 
 //Prepara o início do jogo: embaralha, distribui peças e define quem joga primeiro
@@ -536,7 +493,7 @@ void jogarNaMesa() {
 	ganhador();
 }
 
-void passar() {
+void fP() {
 	//Verifica se o jogo foi ganho antes de passar
 	ganhador();
 	
@@ -689,3 +646,147 @@ void ganhador() {
 	}
 }
 
+void cJogar() {
+	int i, ladoEsquerdo = 0, ladoDireito = 0;
+	char lado;
+	
+	for (i = 0; i < 28; i++) {
+		if (pecas[i].status == '2') {
+			//Verifica se a peça pode ser jogada no lado esquerdo da mesa
+			if (pecas[i].ladoA == mesaE || pecas[i].ladoB == mesaE) {
+				ladoEsquerdo = 1;
+				Jogar = 1;
+			}
+				
+			//Verifica se a peça pode ser jogada no lado direito da mesa
+			else if (pecas[i].ladoA == mesaD || pecas[i].ladoB == mesaD) {
+				ladoDireito = 1;
+				Jogar = 1;
+			}
+			
+			else {
+				Jogar = 0;
+			}
+		
+			//Peça só pode ser jogada no lado direito
+			if (ladoEsquerdo == 0 && ladoDireito == 1) {
+				//Ajusta a peça para o lado certo
+				if (pecas[i].ladoA == mesaD) {
+					mesa[qtMesa].ladoE = pecas[i].ladoA;
+					mesa[qtMesa].ladoD = pecas[i].ladoB;
+					mesaD = pecas[i].ladoB;
+				}
+				
+				else {
+					mesa[qtMesa].ladoE = pecas[i].ladoB;
+					mesa[qtMesa].ladoD = pecas[i].ladoA;
+					mesaD = pecas[i].ladoA;
+				}
+				
+				mesa[qtMesa].status = 'J';
+				pecas[i].status = 'M';
+				qtMesa++;
+				break;
+			}
+			
+			//Peça só pode ser jogada no lado esquerdo
+			else if (ladoEsquerdo == 1 && ladoDireito == 0) {
+				//Move todas as peças para a direita para abrir espaço na esquerda
+				for (int j = qtMesa; j > 0; j--) {
+					mesa[j].ladoD = mesa[j - 1].ladoD;
+					mesa[j].ladoE = mesa[j - 1].ladoE;
+					
+					if (mesa[j - 1].status == 'J') {
+						mesa[j].status = 'J';
+					}
+				}
+				
+				//Posiciona a nova peça na posição 0 (início da mesa)
+				if (pecas[i].ladoA == mesaE) {
+					mesa[0].ladoE = pecas[i].ladoB;
+					mesa[0].ladoD = pecas[i].ladoA;
+					mesaE = pecas[i].ladoB;
+				}
+				
+				else {
+					mesa[0].ladoE = pecas[i].ladoA;
+					mesa[0].ladoD = pecas[i].ladoB;
+					mesaE = pecas[i].ladoA;
+				}
+				
+				mesa[qtMesa].status = 'J';
+				pecas[i].status = 'M';
+				qtMesa++;
+				break;
+			}
+			
+			//Peça pode ser jogada dos dois lados — jogador escolhe
+			else if (ladoEsquerdo == 1 && ladoDireito == 1) {	
+				//Jogar à direita
+				if (lado == 'D') {
+					if (pecas[i].ladoA == mesaD) {
+						mesa[qtMesa].ladoE = pecas[i].ladoA;
+						mesa[qtMesa].ladoD = pecas[i].ladoB;
+						mesaD = pecas[i].ladoB;
+					}
+				
+					else {
+						mesa[qtMesa].ladoE = pecas[i].ladoB;
+						mesa[qtMesa].ladoD = pecas[i].ladoA;
+						mesaD = pecas[i].ladoA;
+					}
+					
+					mesa[qtMesa].status = 'J';
+					pecas[i].status = 'M';
+					qtMesa++;
+					break;
+				}
+			}
+		}
+	}
+	
+	if (Jogar == 0) {
+		for (int i = 14; i < 28; i++) {
+			if (pecas[i].status == 0) {
+				if (jogadorAtual == 2) {
+					pecas[i].status = '2';
+				}
+										
+				else {
+					pecas[i].status = '2';
+				}
+										
+				break;
+			}
+		}
+							
+		ganhador();
+							
+		limparTela();
+		apresentarMesa();
+		iniciarJogo();		
+	}				
+}
+
+//Salva o estado atual do jogo em um arquivo
+void salvarJogo() {
+    FILE *fp;
+
+    if ((fp = fopen("domino.dat", "w")) == NULL) {
+        printf("\nErro: O arquivo nao pode ser aberto para gravacao.\n");
+        Sleep(1000);
+        return;
+    }
+
+    //Grava o estado completo do jogo (structs e variaveis de controle)
+    if (fwrite(&pecas, sizeof(pecas), 1, fp) != 1) { printf("Erro na gravacao do estado das pecas.\n"); fclose(fp); return; }
+    if (fwrite(&mesa, sizeof(mesa), 1, fp) != 1) { printf("Erro na gravacao do estado da mesa.\n"); fclose(fp); return; }
+    if (fwrite(&jogadorAtual, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao do jogador atual.\n"); fclose(fp); return; }
+    if (fwrite(&qtMesa, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao da quantidade de pecas na mesa.\n"); fclose(fp); return; }
+    if (fwrite(&mesaE, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao da extremidade esquerda.\n"); fclose(fp); return; }
+    if (fwrite(&mesaD, sizeof(int), 1, fp) != 1) { printf("Erro na gravacao da extremidade direita.\n"); fclose(fp); return; }
+
+    fclose(fp);
+    printf("\n----------JOGO SALVO COM SUCESSO!----------\n");
+    Sleep(1000);
+}
