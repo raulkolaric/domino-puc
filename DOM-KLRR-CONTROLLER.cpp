@@ -132,7 +132,6 @@ void jogar() {
 				
 					switch(op2) {
 						case('J'): 
-							ganhador();
 							jogarNaMesa();						
 							Sleep(500);
 							fclear();
@@ -144,6 +143,8 @@ void jogar() {
 							break;
 					
 						case('C'):	
+							ganhador();
+								
 							for (int i = 14; i < 28; i++) {
 								if (pecas[i].status == 0) {
 									if (jogadorAtual == 1) {
@@ -463,10 +464,14 @@ void jogarNaMesa() {
 			Sleep(500);
 		}
 	}
+	
+	ganhador();
 }
 
 void passar() {
 	//Passar se ele nao tiver nenhuma peça para jogar e nao tiver mais peca para comprar
+	ganhador();
+	
 	int j = 0, l = 0;
 	char k;
 	
@@ -513,25 +518,94 @@ void passar() {
 void ganhador() {
 	int pecasJ1 = 0;
 	int pecasJ2 = 0;
+	int j = 0, l = 0;
+	int j1 = 0, j2 = 0;
 	
 	for (int i = 0; i < 28; i++) {
 		if (pecas[i].status == '1') {
-			pecasJ1++;
+			pecasJ1 = pecasJ1 + 1;
 		}
 		
 		else if (pecas[i].status == '2') {
-			pecasJ2++;
+			pecasJ2 = pecasJ2 + 1;
+		}
+	}
+	
+	for (int i = 0; i < 28; i++) { 
+		if (pecas[i].status == '1' || pecas[i].status == '2') {
+			if ((pecas[i].ladoA == mesaE || pecas[i].ladoA == mesaD) || (pecas[i].ladoB == mesaE || pecas[i].ladoB == mesaD)) {
+				j = 1;
+			}
+		}		
+	}
+	
+	for (int i = 0; i < 28; i++) {
+		if (pecas[i].status == 0) {
+			l = 1;
 		}
 	}
 	
 	if (pecasJ1 == 0) {
 		limparTela();
 		printf("\n---------O JOGADOR 1 VENCEU O JOGO---------\n");
+		Sleep(2000);
+		op2 = 'S';
 	}
 	
 	else if (pecasJ2 == 0) {
 		limparTela();
 		printf("\n---------O JOGADOR 2 VENCEU O JOGO---------\n");
+		Sleep(2000);
+		op2 = 'S';
 	}	
+	
+	else if (j == 0 && l == 0) {
+		if (pecasJ2 > pecasJ1) {
+			limparTela();
+			printf("\n---------O JOGADOR 1 VENCEU O JOGO---------\n");
+			Sleep(2000);
+			op2 = 'S';
+		}
+		
+		else if (pecasJ1 > pecasJ2) {
+			limparTela();
+			printf("\n---------O JOGADOR 2 VENCEU O JOGO---------\n");
+			Sleep(2000);
+			op2 = 'S';
+		}
+		
+		else {
+			for (int i = 0; i < 28; i++) {
+				if (pecas[i].status == '1') {
+					j1 = j1 + pecas[i].ladoA + pecas[i].ladoB;
+				}
+				
+				else if (pecas[i].status == '2') {
+					j2 = j2 + pecas[i].ladoA + pecas[i].ladoB;
+				}
+			}
+			
+			if (j2 > j1) {
+				limparTela();
+				printf("\n---------O JOGADOR 1 VENCEU O JOGO---------\n");
+				Sleep(2000);
+				op2 = 'S';
+			}
+			
+			else if (j1 > j2) {
+				limparTela();
+				printf("\n---------O JOGADOR 2 VENCEU O JOGO---------\n");
+				Sleep(2000);
+				op2 = 'S';
+			}
+			
+			else {
+				limparTela();
+				printf("\n---------O JOGO DEU EMPATE---------\n");
+				Sleep(2000);
+				op2 = 'S';
+			}
+		}
+	}
 }
 
