@@ -186,7 +186,61 @@ void jogar() {
 				break;
 			
 			case('3'): 
-				carregarJogo();
+				printf("\n-----------RETORNANDO AO JOGO!-----------\n");
+   				Sleep(1000);
+				apresentarMesa();
+				iniciarJogo();
+				
+				do {
+					menuJogador();
+				
+					switch(op2) {
+						case('J'): 
+							jogarNaMesa();						
+							Sleep(500);
+							fclear();
+							
+							if (Jogar == 1) {
+								trocarJogador();
+							}
+								
+							break;
+					
+						case('C'):	
+							ganhador();
+								
+							for (int i = 14; i < 28; i++) {
+								if (pecas[i].status == 0) {
+									if (jogadorAtual == 1) {
+										pecas[i].status = '1';
+									}
+									
+									else {
+										pecas[i].status = '2';
+									}
+									
+									break;
+								}
+							}
+							
+							limparTela();
+							apresentarMesa();
+							iniciarJogo();
+						
+							break;
+				
+						case('P'):
+							passar();
+							break;
+				
+						case('S'):
+							limparTela();
+							break;
+					}
+				} while (op2 != 'S');
+				
+				limparTela();
+						
 				break;
 			
 			case('4'): 
