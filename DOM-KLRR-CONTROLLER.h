@@ -20,6 +20,9 @@
 void carregarJogo();
 void cJogar();
 void embaralhar();
+void fC();
+void fJ();
+void fP();
 void ganhador();
 void iniciarJogo();
 void jogar();
@@ -28,10 +31,6 @@ void prepararJogo();
 int primeiroLance();
 void salvarJogo();
 void trocarJogador();
-
-void fJ();
-void fC();
-void fP();
 
 #endif // DOM_KLRR_CONTROLLER_H
 

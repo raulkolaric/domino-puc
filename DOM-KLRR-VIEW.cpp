@@ -7,20 +7,12 @@
 
 #include "DOM-KLRR-VIEW.h"
 
-//Exibe uma mensagem de texto simples na tela
-void apresentarMensagem(char mens[100]) {
-	printf("%s\n", mens);	
-}
-
 //Variaveis para os Menus
 char op1, op2;
 
-//Exibe todas as 28 peças do dominó
-void ApresentarPecas() {
-	for (int l=0; l<28; l++) {
-		printf("[%d|%d]	", pecas[l].ladoA, pecas[l].ladoB);		
-	}
-	printf("\n\n");
+//Exibe uma mensagem de texto simples na tela
+void apresentarMensagem(char mens[100]) {
+	printf("%s\n", mens);	
 }
 
 //Mostra a mesa atual (apenas peças já jogadas)
