@@ -27,10 +27,10 @@ void carregarJogo() {
     if (fread(&mesaD, sizeof(int), 1, fp) != 1) { printf("Erro na leitura da extremidade direita.\n"); fclose(fp); return; }
 
     fclose(fp);
-    printf("\n-------JOGO CARREGADO COM SUCESSO!-------\n");
-    Sleep(1000);
     
     //Apresenta o jogo carregado e entra no loop principal
+    printf("\n-------JOGO CARREGADO COM SUCESSO!-------\n");
+    Sleep(1000);
     limparTela();
     apresentarMesa();
     iniciarJogo();
@@ -40,15 +40,15 @@ void carregarJogo() {
     
         switch(op2) {
             case('J'):
-                fJ();				
+                fJogar();				
 				break;
         
             case('C'):	
-                fC();
+                fComprar();
             	break;
     
             case('P'):
-                fP();
+                fPassar();
                 break;
     
             case('S'):
@@ -63,6 +63,7 @@ void embaralhar() {
 	srand(time(0));						//Inicializa o gerador de números aleatórios
 	int n = 28;			
 	struct Peca temp;
+	
 	for(int i = n - 1; i > 0; i--) {
 		int j = rand()%(n);
 		temp = pecas[i];
@@ -71,7 +72,7 @@ void embaralhar() {
 	}
 }
 
-void fC() {
+void fComprar() {
 	for (int i = 14; i < 28; i++) {
 		if (pecas[i].status == 0) {
 			if (jogadorAtual == 1) {
@@ -87,13 +88,9 @@ void fC() {
 	}
 	
 	ganhador();
-	
-	limparTela();
-	apresentarMesa();
-	iniciarJogo();
 }
 
-void fJ() {
+void fJogar() {
 	jogarNaMesa();						
 	Sleep(500);
 	fclear();
@@ -103,12 +100,12 @@ void fJ() {
 	}							
 }
 
-void fP() {
+void fPassar() {
 	//Verifica se o jogo foi ganho antes de passar
 	ganhador();
 	
 	//Passar se ele nao tiver nenhuma peça para jogar e nao tiver mais peca para comprar
-	int j = 0, l = 0;
+	int j = 0, c = 0;
 	char k;
 	
 	//Define o jogador atual como '1' ou '2'
@@ -132,19 +129,11 @@ void fP() {
 	//Verifica se ainda existem peças no monte para comprar
 	for (int i = 0; i < 28; i++) {
 		if (pecas[i].status == 0) {
-			l = 1;
+			c = 1;
 		}
 	}
 	
-	//Se não há jogadas nem peças para comprar: passa o turno
-	if (j == 0 && l == 0) {
-		limparTela();
-		trocarJogador();
-		apresentarMesa();
-		iniciarJogo();
-	}
-	
-	else if (j == 1){
+	if (j == 1) {
 		printf("\n--------------HA JOGADAS POSSIVEIS!--------------\n");
 		Sleep(500);
 	}
@@ -158,7 +147,7 @@ void fP() {
 void ganhador() {
 	int pecasJ1 = 0;
 	int pecasJ2 = 0;
-	int j = 0, l = 0;
+	int j = 0, c = 0;
 	int j1 = 0, j2 = 0;
 	
 	//Conta peças ainda na mão dos jogadores
@@ -184,7 +173,7 @@ void ganhador() {
 	//Verifica se ainda existem peças para comprar
 	for (int i = 0; i < 28; i++) {
 		if (pecas[i].status == 0) {
-			l = 1;
+			c = 1;
 		}
 	}
 	
@@ -204,7 +193,7 @@ void ganhador() {
 	}	
 	
 	//Se nao for possivel mais jogar ou comprar pecas, vence aquele que tiver menos pecas
-	else if (j == 0 && l == 0) {
+	else if (j == 0 && c == 0) {
 		if (pecasJ2 > pecasJ1) {
 			limparTela();
 			printf("\n---------O JOGADOR 1 VENCEU O JOGO---------\n");
@@ -296,15 +285,15 @@ void jogar() {
 				
 					switch(op2) {
 						case('J'): 
-    						fJ();
+    						fJogar();
 							break;
 					
 						case('C'):	
-							fC();
+							fComprar();
 							break;
 				
 						case('P'):
-							fP();
+							fPassar();
 							break;
 				
 						case('S'):
@@ -325,15 +314,16 @@ void jogar() {
 					
 						switch(op2) {
 							case('J'): 
-								fJ();	
+								fJogar();
+								cJogar();	
 								break;
 						
 							case('C'):	
-								fC();
+								fComprar();
 								break;
 					
 							case('P'):
-								fP();
+								fPassar();
 								cJogar();
 								break;
 					
@@ -358,15 +348,15 @@ void jogar() {
 				
 					switch(op2) {
 						case('J'): 
-							fJ();
+							fJogar();
 							break;
 					
 						case('C'):	
-							fC();
+							fComprar();
 							break;
 				
 						case('P'):
-							fP();
+							fPassar();
 							break;
 				
 						case('S'):

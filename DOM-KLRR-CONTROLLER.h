@@ -20,9 +20,9 @@
 void carregarJogo();
 void cJogar();
 void embaralhar();
-void fC();
-void fJ();
-void fP();
+void fComprar();
+void fJogar();
+void fPassar();
 void ganhador();
 void iniciarJogo();
 void jogar();
