@@ -31,9 +31,6 @@ void carregarJogo() {
     //Apresenta o jogo carregado e entra no loop principal
     printf("\n-------JOGO CARREGADO COM SUCESSO!-------\n");
     Sleep(1000);
-    limparTela();
-    apresentarMesa();
-    iniciarJogo();
     
     do {
         menuJogador();
@@ -97,13 +94,12 @@ void fJogar() {
 	
 	if (Jogar == 1) {
 		trocarJogador();
-	}							
+	}	
+	
+	ganhador();						
 }
 
 void fPassar() {
-	//Verifica se o jogo foi ganho antes de passar
-	ganhador();
-	
 	//Passar se ele nao tiver nenhuma peça para jogar e nao tiver mais peca para comprar
 	int j = 0, c = 0;
 	char k;
@@ -138,17 +134,23 @@ void fPassar() {
 		Sleep(500);
 	}
 	
-	else {
+	else if (c == 1) {
 		printf("\n--------------HA PECAS PARA COMPRAR!--------------\n");
 		Sleep(500);
 	}
+	
+	else {
+		trocarJogador();
+	}
+	
+	ganhador();
 }
 
 void ganhador() {
 	int pecasJ1 = 0;
 	int pecasJ2 = 0;
-	int j = 0, c = 0;
 	int j1 = 0, j2 = 0;
+	int j = 0, c = 0;
 	
 	//Conta peças ainda na mão dos jogadores
 	for (int i = 0; i < 28; i++) {
@@ -331,6 +333,7 @@ void jogar() {
 								limparTela();
 								break;
 						}
+						
 				} while (op2 != 'S');
 					
 				limparTela();
@@ -340,8 +343,6 @@ void jogar() {
 			case('3'): 
 				printf("\n-----------RETORNANDO AO JOGO!-----------\n");
    				Sleep(1000);
-				apresentarMesa();
-				iniciarJogo();
 				
 				do {
 					menuJogador();
@@ -527,8 +528,6 @@ void jogarNaMesa() {
 		}
 	}
 	
-	//Verifica se há ganhador após a jogada
-	ganhador();
 }
 
 //Prepara o início do jogo: embaralha, distribui peças e define quem joga primeiro
@@ -563,11 +562,7 @@ void prepararJogo() {
 	
 	Sleep(1000);
 	
-	apresentarMesa();
-	
 	trocarJogador();
-	
-	iniciarJogo();
 }
 
 //Define quem será o primeiro a jogar - Critério: maior duplo ou, se não houver, maior soma
