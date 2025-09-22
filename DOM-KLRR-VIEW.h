@@ -11,7 +11,6 @@
 #include <time.h>
 
 //Declarações das funções de interface
-void apresentarMensagem(char mens[100]);
 void apresentarMesa();
 void fclear();
 void limparTela();

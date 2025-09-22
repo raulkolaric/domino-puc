@@ -10,15 +10,11 @@
 //Variaveis para os Menus
 char op1, op2;
 
-//Exibe uma mensagem de texto simples na tela
-void apresentarMensagem(char mens[100]) {
-	printf("%s\n", mens);	
-}
-
 //Mostra a mesa atual (apenas peças já jogadas)
 void apresentarMesa() {
    //Calcula o tamanho do array 'mesa'
     int tamanho = sizeof(mesa) / sizeof(mesa[0]);
+    
     printf("\n                                                     MESA                                          \n");
 	printf("=======================================================================================================================\n");
 	
@@ -28,6 +24,7 @@ void apresentarMesa() {
 			printf("[%d|%d] ", mesa[i].ladoE, mesa[i].ladoD);	
 		}
     }
+    
 	printf("\n=======================================================================================================================\n");
 }	
 
@@ -46,6 +43,7 @@ void limparTela() {
 char menuInicial() {
 	do {
 		limparTela();
+				
 		printf("\n-------------------MENU-------------------\n");
 		printf("| 1 - Iniciar jogo (2 jogadores)         |\n");
 		printf("| 2 - Iniciar jogo (contra o computador) |\n");

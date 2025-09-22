@@ -21,14 +21,14 @@ struct Mesa
 {
 	int ladoE;
 	int ladoD;
-	char status; //'J', 'N'
-} mesa[28];			//Vetor representando até 28 peças que podem estar na mesa
+	char status; 	//'J', 'N'
+} mesa[28];		 	//Vetor representando até 28 peças que podem estar na mesa
 
 
 struct Peca {
 	int ladoA;
 	int ladoB;
 	char status;	//NULL, '1', '2', 'M'
-					//NULL = Disponível, 1= com jogador 1, 2 = com o jogador 2
+					//NULL = Disponível, 1 = com jogador 1, 2 = com o jogador 2
 } pecas[28];		//Vetor com as 28 peças possíveis do dominó
 
