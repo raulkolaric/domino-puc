@@ -1,5 +1,5 @@
 //DOM-KLRR-CONTROLLER.h - Projeto Dominó
-//**/**/2025 - Grupo: KLRR
+//23/09/2025 - Grupo: KLRR
 //Kauã Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
@@ -19,17 +19,19 @@
 
 //Declaração das funções utilizadas no jogo
 void carregarJogo();
-void cJogar();
+void caso1();
+void caso2();
+void caso3();
 void embaralhar();
 void fComprar();
 void fJogar();
 void fPassar();
 void ganhador();
-void iniciarJogo();
 void jogar();
-void jogarNaMesa();
+void maquinaJogar();
+void mostrarPecas();
 void prepararJogo();
-int primeiroLance();
+void primeiroLance();
 void salvarJogo();
 void trocarJogador();
 

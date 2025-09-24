@@ -1,5 +1,5 @@
 //DOM-KLRR-MODEL.h - Projeto Dominó
-//**/**/2025 - Grupo: KLRR
+//23/09/2025 - Grupo: KLRR
 //Kauã Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
@@ -11,8 +11,8 @@
 void gerarPecas();
 
 //Variáveis globais
+int maquina;  
 int jogadorAtual; 	//Indica o jogador da vez: 1 = Jogador 1, 2 = Jogador 2
-int Jogar = 0;
 int mesaD, mesaE;	//Extremidades Esquerda e Direita da mesa
 int qtMesa; 		//Quantidade de pecas na mesa
 

@@ -1,14 +1,11 @@
 //DOM-KLRR-VIEW.cpp - Projeto Dominó
-//**/**/2025 - Grupo: KLRR
+//23/09/2025 - Grupo: KLRR
 //Kauã Bezerra Brito
 //Liam Vedovato Lopes
 //Raul Kolaric
 //Rodrigo Ward Leite
 
 #include "DOM-KLRR-VIEW.h"
-
-//Variaveis para os Menus
-char op1, op2;
 
 //Mostra a mesa atual (apenas peças já jogadas)
 void apresentarMesa() {
@@ -31,13 +28,19 @@ void apresentarMesa() {
 //Limpa o buffer de entrada
 void fclear() {
 	char carac;
- 	while((carac = fgetc(stdin)) != EOF && carac != '\n') {}
+
+	while ((carac = fgetc(stdin)) != EOF && carac != '\n') {
+	
+	}
 }
 
 //Limpa a tela do console
 void limparTela() {
 	system("cls");
 }
+
+//Variaveis para os Menus
+char op1, op2;
 
 //Exibe o menu principal e retorna a opção escolhida
 char menuInicial() {
@@ -63,7 +66,7 @@ char menuInicial() {
 		Sleep(500);
 		fclear();
 	} while (1);
-	
+
 	fclear();
 	return op1; 
 }
@@ -73,7 +76,7 @@ char menuJogador() {
 	do {
 		limparTela();
 		apresentarMesa();
-		iniciarJogo();
+		mostrarPecas();
 		
 		printf("\n----------------------------------------------------------\n");
 		printf("| J - Jogar (possiveis %d ou %d)                           |\n", mesaE, mesaD);
