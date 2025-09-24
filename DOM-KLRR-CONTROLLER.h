@@ -7,7 +7,6 @@
 
 #ifndef DOM_KLRR_CONTROLLER_H
 #define DOM_KLRR_CONTROLLER_H
-#endif // DOM_KLRR_CONTROLLER_H
 
 //Bibliotecas padrão
 #include <ctype.h>
@@ -35,4 +34,4 @@ void primeiroLance();
 void salvarJogo();
 void trocarJogador();
 
-
+#endif // DOM_KLRR_CONTROLLER_H

@@ -8,7 +8,8 @@
 #include "DOM-KLRR-CONTROLLER.h"
 #include "DOM-KLRR-VIEW.cpp"
 
-//Carrega um jogo salvo a partir de um arquivo
+//Carrega o estado do jogo a partir de um arquivo "domino.dat"
+//Inclui verificação de erros na leitura e mantém o loop do menu de jogadas.
 void carregarJogo() {
     FILE *fp;
 
@@ -56,6 +57,7 @@ void carregarJogo() {
     } while (op2 != 'S');
 }
 
+//jogador vs jogador
 void caso1() {
 	maquina = 0;
 	prepararJogo();
@@ -83,6 +85,7 @@ void caso1() {
 	} while (op2 != 'S');
 }
 
+//jogador vs máquina
 void caso2() {
 	maquina = 1;
 	prepararJogo();
@@ -111,6 +114,7 @@ void caso2() {
 	} while (op2 != 'S');
 }
 
+//retomar jogo salvo
 void caso3() {
 	printf("\n-----------RETORNANDO AO JOGO!-----------\n");
 	Sleep(1000);
@@ -152,6 +156,8 @@ void embaralhar() {
 	}
 }
 
+//Permite que o jogador compre uma peça do monte (índices 14-27)
+//Atualiza status da peça para o jogador atual
 void fComprar() {
 	int pecasComprar = 0;
 	
@@ -179,13 +185,18 @@ void fComprar() {
 	ganhador();
 }
 
+//Controla a jogada do jogador humano
+//Valida índice e status da peça, verifica lados possíveis e atualiza a mesa
+//Evita jogar peças inválidas
 void fJogar() {
 	int jogadorJogou = 0;
+	
 	//Solicita o índice da peça que o jogador deseja jogar
 	int indice;
 	printf("Indice da peca selecionada: ");
 	scanf(" %d", &indice);
 	
+	//Validação do índice
 	if (indice < 0 || indice > 27) {
         printf("\n--------------INDICE INVALIDO!--------------\n");
         Sleep(500);	
@@ -193,6 +204,7 @@ void fJogar() {
         return;
     }
 	
+	//Validação da peça: deve pertencer ao jogador atual
 	if ((jogadorAtual == 1 && pecas[indice].status != '1') || (jogadorAtual == 2 && pecas[indice].status != '2')) {
 		printf("\n--------------PECA INVALIDA!--------------");
 		Sleep(500);
@@ -264,6 +276,7 @@ void fJogar() {
 		else {
 			printf("\n--------------LADO INVALIDO!--------------");
 			Sleep(500);
+			return;
 		}
 	}
 
@@ -316,11 +329,13 @@ void fJogar() {
 	else {
 		printf("\n--------------PECA INVALIDA!--------------");
 		Sleep(500);
+		return;
 	}
 	
 	Sleep(500);
 	fclear();
 	
+	//Após jogada, verifica ganhador e passa vez ou executa máquina
 	if (jogadorJogou == 1) {
 		ganhador();	
 		
@@ -334,6 +349,8 @@ void fJogar() {
 	}
 }
 
+//Permite que o jogador passe a vez se não houver jogadas possíveis
+//Se não houver peças para comprar, troca jogador automaticamente
 void fPassar() {
 	//Verifica se o jogador atual possui jogadas possíveis
 	int haPecasParaJogar = 0;
@@ -368,15 +385,19 @@ void fPassar() {
 	}
 	
 	else {
-		trocarJogador();
 		ganhador();
 		
-		if (maquina == 1) {
+		if (maquina == 0) {
+			trocarJogador();
+		}
+		
+		else {
 			maquinaJogar();
-		}	
+		}
 	}
 }
 
+//Verifica se algum jogador venceu
 void ganhador() {
 	//Conta peças ainda na mão dos jogadores
 	int pecasJ1 = 0, pecasJ2 = 0;
@@ -495,6 +516,9 @@ void jogar() {
 	} while (op1 != '0');
 }
 
+//Lógica de jogada da máquina
+//Percorre peças da máquina (índices 7-27), tenta jogar à direita ou esquerda
+//Compra peça se não houver jogadas possíveis
 void maquinaJogar() {
 	int maquinaJogou = 0;
 	
@@ -513,7 +537,7 @@ void maquinaJogar() {
 					ladoDireito = 1;
 				}
 			
-				//Peça só pode ser jogada no lado direito
+				//Peça pode ser jogada no lado direito
 				if (ladoDireito == 1) {
 					//Ajusta a peça para o lado certo
 					if (pecas[indice].ladoA == mesaD) {
@@ -535,7 +559,7 @@ void maquinaJogar() {
 					break;
 				}
 				
-				//Peça só pode ser jogada no lado esquerdo
+				//Peça pode ser jogada no lado esquerdo
 				else if (ladoEsquerdo == 1) {
 					//Move todas as peças para a direita para abrir espaço na esquerda
 					for (int i = qtMesa; i > 0; i--) {
@@ -644,7 +668,7 @@ void prepararJogo() {
 
 //Define quem será o primeiro a jogar - Critério: maior duplo ou, se não houver, maior soma
 void primeiroLance() {
-	int maior = -1, indice;										// j = valor da maior peça encontrada, k = índice
+	int maior = -1, indice;										
 	
 	//Procura o maior duplo (ex: 6-6, 5-5, etc.)
 	for (int i = 0; i < 14; i++) {
